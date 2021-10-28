@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/addbutton_mainactivity.xml" value="0.29074074074074074" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/customswitch_off.xml" value="0.35555555555555557" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/customswitch_on.xml" value="0.35555555555555557" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/customswitch_selector.xml" value="0.35555555555555557" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/customswitch_thumb.xml" value="0.35555555555555557" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_add_schedule.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/day_schedule_recyclerview.xml" value="0.25364583333333335" />
       </map>
