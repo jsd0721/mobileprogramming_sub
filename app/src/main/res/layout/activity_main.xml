@@ -7,24 +7,23 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendarView_mainActivity"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="40dp"
+        android:id="@+id/schedule_add_button_mainActivity"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/addbutton_mainactivity"
-        android:text="+" />
+        android:layout_marginRight="10dp"
+        android:text="+"
+        android:layout_gravity="right"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:background="#d9d9d9"
         tools:listitem="@layout/day_schedule_recyclerview" />
 </LinearLayout>

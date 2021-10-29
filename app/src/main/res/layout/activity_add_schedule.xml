@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".add_schedule_Activity">
+    tools:context=".add_schedule_Activity"
+    android:backgroundTint="#f8f9fa">
 
     <TextView
         android:id="@+id/textView"
@@ -35,13 +36,27 @@
         android:background="@color/white">
 
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="알람"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:textSize="25dp"/>
+
         <Switch
             android:id="@+id/switch2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Switch"
+            android:layout_gravity="center"
+            android:showText="false"
+            android:textSize="20dp"
             android:thumb="@drawable/customswitch_thumb"
-            android:track="@drawable/customswitch_selector" />
+            android:thumbTextPadding="50dp"
+            android:track="@drawable/customswitch_selector"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 
     <LinearLayout
@@ -56,6 +71,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="시간 설정"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="__시 __분"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            />
     </LinearLayout>
 </LinearLayout>
