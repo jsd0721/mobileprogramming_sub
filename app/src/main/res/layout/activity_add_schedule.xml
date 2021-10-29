@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".add_schedule_Activity"
-    android:backgroundTint="#f8f9fa">
+    android:backgroundTint="#f8f8f8">
 
     <TextView
         android:id="@+id/textView"

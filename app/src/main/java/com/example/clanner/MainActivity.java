@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.Calendar;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         selectedDay = String.valueOf(calendar.getCurrentDate());
+        calendar.setSelectedDate(CalendarDay.today());
 
         scheduleAddBtn.setOnClickListener(new View.OnClickListener() {
         @Override
