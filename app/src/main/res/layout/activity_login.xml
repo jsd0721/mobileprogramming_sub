@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".loginActivity">
+
+<!--    이미지 만들어서 넣을 곳. clanner 이미지-->
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/hy_horizontal_line_title"
+        android:layout_marginTop="100dp"/>
+
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_edittext_box"
+        android:ems="10"
+        android:hint="@string/text_ID"
+        android:inputType="textPersonName"
+        android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:selectAllOnFocus="true"/>
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_edittext_box"
+        android:ems="20"
+        android:hint="@string/text_password"
+        android:inputType="textPassword"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:selectAllOnFocus="true" />
+
+
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="자동 로그인"
+        android:textColor="@color/black"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_login"
+        android:textSize="20dp"
+        android:padding="20dp"
+        style=""
+        android:layout_margin = "20dp"
+        android:textColor="@color/darkPink"
+        android:background="@drawable/login_button"/>
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        >
+        <TextView
+            android:id="@+id/ID_password_find_button_mainActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="ID/비밀번호 찾기"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/darkPink"/>
+        <TextView
+            android:id="@+id/sign_up_text_mainActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="가입하기"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/darkPink"/>
+    </LinearLayout>
+
+
+</LinearLayout>
