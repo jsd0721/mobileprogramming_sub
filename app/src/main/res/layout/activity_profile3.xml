@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="150dp"
             android:textColor="@color/black"
-            android:fontFamily="@font/fontB"/>
+            android:fontFamily="@font/font_b"/>
 
         <Button
             android:id="@+id/btnProfile"
