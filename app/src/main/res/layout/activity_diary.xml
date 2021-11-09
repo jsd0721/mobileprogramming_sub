@@ -16,11 +16,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Diary"
-            android:textSize="22dp"
+            android:textSize="25dp"
             android:layout_gravity="center"
             android:layout_marginLeft="180dp"
             android:textColor="@color/black"
-            android:fontFamily="@font/fontB"/>
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/btnDiarywrite"
@@ -31,7 +31,7 @@
             android:background="#00ff0000"
             android:textColor="@color/black"
             android:layout_gravity="center"
-            android:layout_marginLeft="70dp" />
+            android:layout_marginLeft="80dp" />
 
 
     </LinearLayout>

@@ -15,7 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class loginActivity extends AppCompatActivity { /*
+public class loginActivity extends AppCompatActivity {
+    /*
     private  static  final String TAG = "loginActivity";
     private FirebaseAuth mAuth;
 
