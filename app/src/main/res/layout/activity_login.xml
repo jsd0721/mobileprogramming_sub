@@ -18,7 +18,7 @@
 
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/IDInput_loginActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -33,7 +33,7 @@
         android:selectAllOnFocus="true"/>
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/passwordInput_loginActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -47,20 +47,30 @@
         android:layout_marginEnd="20dp"
         android:selectAllOnFocus="true" />
 
-
+<!--    아이디나 패스워드가 틀렸을때, 혹은 둘 중 하나 입력 안했을때 경고창-->
+    <TextView
+        android:id="@+id/warningText_loginActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID 혹은 비밀번호를 확인해 주세요!"
+        android:textColor="#ff0000"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        />
 
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="자동 로그인"
         android:textColor="@color/black"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/loginButton_loginActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_login"
@@ -79,7 +89,7 @@
         android:layout_gravity="center"
         >
         <TextView
-            android:id="@+id/ID_password_find_button_mainActivity"
+            android:id="@+id/ID_passwordFind_loginActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -89,7 +99,7 @@
             android:layout_marginRight="5dp"
             android:textColor="@color/darkPink"/>
         <TextView
-            android:id="@+id/sign_up_text_mainActivity"
+            android:id="@+id/createAccount_loginActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

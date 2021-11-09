@@ -25,6 +25,11 @@
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/diary_item.xml" value="0.25" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/menu/toolbar_layout.xml" value="0.2046875" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/drawable/custom_edittext_box.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_join.xml" value="0.2046875" />
+        <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_login.xml" value="0.2046875" />
+        <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_main.xml" value="0.2046875" />
+        <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_profile3.xml" value="0.2046875" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/addbutton_mainactivity.xml" value="0.29074074074074074" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/custom_edittext_box.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/customswitch_off.xml" value="0.35555555555555557" />
@@ -32,6 +37,7 @@
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/customswitch_selector.xml" value="0.35555555555555557" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/customswitch_thumb.xml" value="0.35555555555555557" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/join_button.xml" value="0.4197916666666667" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/login_button.xml" value="0.4197916666666667" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/login_button_or_join_button.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_add_schedule.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_login.xml" value="0.4" />

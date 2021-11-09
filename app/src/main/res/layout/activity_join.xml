@@ -17,13 +17,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/fontB"
+        android:fontFamily="@font/font_b"
         android:text="회원가입"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="35dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="25dp"/>
+        android:layout_marginTop="150dp"/>
 
 
     <EditText

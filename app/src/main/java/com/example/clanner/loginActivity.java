@@ -14,9 +14,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class loginActivity extends AppCompatActivity {
+
+public class loginActivity extends AppCompatActivity { /*
     private  static  final String TAG = "loginActivity";
     private FirebaseAuth mAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +27,7 @@ public class loginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.button2).setOnClickListener(onClickListener);
+        findViewById(R.id.loginButton_loginActivity).setOnClickListener(onClickListener);
     }
     @Override
     public void onStart() {
@@ -37,7 +40,7 @@ public class loginActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case  R.id.button2:
+                case  R.id.loginButton_loginActivity:
                     join();
                     break;
             }
@@ -67,7 +70,7 @@ public class loginActivity extends AppCompatActivity {
     }
     private void  startToast(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-    }
+    } */
 }
 
 
