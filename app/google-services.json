@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "626968679952",
+    "project_id": "clanner-2087a",
+    "storage_bucket": "clanner-2087a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626968679952:android:78dd087e1afb02d5a85c95",
+        "android_client_info": {
+          "package_name": "com.example.clanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "626968679952-q429a0tb8jmbgpapaoo7c1bmcv0eg2ih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVjUPxekWnsW2Le_fCZJxAEotUdpMmPRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626968679952-q429a0tb8jmbgpapaoo7c1bmcv0eg2ih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

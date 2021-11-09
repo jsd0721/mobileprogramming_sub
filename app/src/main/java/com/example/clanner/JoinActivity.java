@@ -1,12 +1,13 @@
 package com.example.clanner;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,30 +15,33 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class loginActivity extends AppCompatActivity {
-    private  static  final String TAG = "loginActivity";
+public class JoinActivity extends AppCompatActivity {
+    private  static  final String TAG = "JoinActivity";
     private FirebaseAuth mAuth;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_join);
 
+        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.button2).setOnClickListener(onClickListener);
+        findViewById(R.id.buttonJoin).setOnClickListener(onClickListener);
     }
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
+
     View.OnClickListener onClickListener = new View.OnClickListener(){
 
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case  R.id.button2:
+                case  R.id.buttonJoin:
                     join();
                     break;
             }
@@ -69,6 +73,18 @@ public class loginActivity extends AppCompatActivity {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
