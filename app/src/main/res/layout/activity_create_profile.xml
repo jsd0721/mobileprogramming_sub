@@ -48,15 +48,15 @@
             android:layout_height="match_parent"
             tools:srcCompat="@tools:sample/avatars" />
     </androidx.cardview.widget.CardView>
-<!--
-    <Button
-        android:id="@+id/btnProfilePhoto"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@drawable/photo"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="2dp"/>
-        -->
+    <!--
+        <Button
+            android:id="@+id/btnProfilePhoto"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/photo"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="2dp"/>
+            -->
 
     <EditText
         android:id="@+id/editUserName"

@@ -15,24 +15,27 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        android:id="@+id/calendarView_mainActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:mcv_selectionColor="@color/darkPink" />
-
-    <Button
-        android:id="@+id/schedule_add_button_mainActivity"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/addbutton_mainactivity"
-        android:layout_marginRight="10dp"
-        android:text="+"
-        android:layout_gravity="right"/>
-
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        tools:listitem="@layout/day_schedule_recyclerview" />
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/navigationParentView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/mainactivity_include_layout"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:text="메뉴 들어갈 부분"
+            android:layout_gravity="left"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="#ff00ff" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
 </LinearLayout>

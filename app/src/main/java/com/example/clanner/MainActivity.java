@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,9 +36,16 @@ public class MainActivity extends AppCompatActivity {
         calendar = (MaterialCalendarView)findViewById(R.id.calendarView_mainActivity);
         tb = (Toolbar)findViewById(R.id.toolbar_mainactivity);
 
+        //액션바 설정
         setSupportActionBar(tb);
         ActionBar ab = getSupportActionBar();
         ab.setTitle("");
+
+        //액션바에서 내비게이션 버튼 만들기
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
+        ab.setHomeAsUpIndicator(R.drawable.menuicon);
+
 
 
 
