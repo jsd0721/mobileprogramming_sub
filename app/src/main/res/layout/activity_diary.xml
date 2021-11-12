@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:background="@color/primaryPink">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diary"
+            android:textSize="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="180dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btnDiarywrite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성"
+            android:textSize="20dp"
+            android:background="#00ff0000"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginLeft="80dp" />
+
+
+    </LinearLayout>
+
+
+
+    <ListView
+         android:id="@+id/list"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         tools:listitem="@layout/diary_item"
+        android:layout_margin="7dp">
+
+    </ListView>
+
+    <!--<androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="7dp"
+        tools:listitem="@layout/diary_item"/>-->
+
+</LinearLayout>

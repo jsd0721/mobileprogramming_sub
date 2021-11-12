@@ -26,11 +26,22 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".JoinActivity"
+            android:exported="false" />
+        <activity
             android:name=".add_schedule_Activity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+<<<<<<< HEAD
             android:exported="false" />
+=======
+            android:exported="false">
+        </activity>
+        <activity android:name=".profileActivity" />
+        <activity android:name=".diaryActivity" />
+        <activity android:name=".diarywriteActivity" />
+>>>>>>> ad95a50eb86ea44571670d39c7d93c056e9ba5d0
     </application>
 
 </manifest>
