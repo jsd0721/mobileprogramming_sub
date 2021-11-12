@@ -84,22 +84,3 @@ public class JoinActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> ad95a50eb86ea44571670d39c7d93c056e9ba5d0
