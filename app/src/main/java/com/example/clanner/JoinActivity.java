@@ -1,5 +1,6 @@
 package com.example.clanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,7 @@ public class JoinActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 startToast("회원가입에 성공하였습니다.");
+                                startloginActivity();
                                 // 성공했을때 로직
                             } else {
                                 if (task.getException() != null){
@@ -71,6 +73,11 @@ public class JoinActivity extends AppCompatActivity {
     }
     private void  startToast(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
+    private void startloginActivity(){
+        Intent intent = new Intent(this,loginActivity.class);
+        startActivity(intent);
     }
 }
 

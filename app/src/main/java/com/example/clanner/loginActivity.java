@@ -3,6 +3,7 @@ package com.example.clanner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -16,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class loginActivity extends AppCompatActivity {
-    /*
+
     private  static  final String TAG = "loginActivity";
     private FirebaseAuth mAuth;
 
@@ -28,7 +29,8 @@ public class loginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.loginButton_loginActivity).setOnClickListener(onClickListener);
+        findViewById(R.id.loginButton_loginActivity).setOnClickListener(onClickListener); //로그인버튼
+        findViewById(R.id.createAccount_loginActivity).setOnClickListener(onClickListener); //가입하기 textview
     }
     @Override
     public void onStart() {
@@ -36,34 +38,41 @@ public class loginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
+
     View.OnClickListener onClickListener = new View.OnClickListener(){
 
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case  R.id.loginButton_loginActivity:
-                    join();
+                case R.id.loginButton_loginActivity:
+                    login();
+                    break;
+                case R.id.createAccount_loginActivity:
+                    startjoinActivity();
                     break;
             }
+
         }
     };
-    private void  join(){
-        String email = ((EditText)findViewById(R.id.editJoinEmail)).getText().toString();
-        String password = ((EditText)findViewById(R.id.editJoinPassword)).getText().toString();
+    private void  login(){
+        String email = ((EditText)findViewById(R.id.EmailInput_loginActivity)).getText().toString();
+        String password = ((EditText)findViewById(R.id.passwordInput_loginActivity)).getText().toString();
 
         if (email.length() > 0 && password.length() > 0){
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, (task) ->  {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                startToast("회원가입에 성공하였습니다.");
-                                // 성공했을때 로직
+                                startToast("로그인에 성공하였습니다.");
+                                startMainActivity();
                             } else {
-                                if (task.getException() != null){
+                                if (task.getException() != null) {
                                     startToast(task.getException().toString());
                                 }
-                                // 실패했을때 로직
                             }
+                        }
                     });
         }else {
             startToast("이메일 또는 비밀번호를 입력해 주세요.");
@@ -71,7 +80,17 @@ public class loginActivity extends AppCompatActivity {
     }
     private void  startToast(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-    } */
+    }
+
+    private void startMainActivity(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void startjoinActivity(){
+        Intent intent = new Intent(this,JoinActivity.class);
+        startActivity(intent);
+    }
 }
 
 
