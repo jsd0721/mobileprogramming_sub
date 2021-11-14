@@ -40,9 +40,14 @@
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/login_button.xml" value="0.4197916666666667" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/drawable/login_button_or_join_button.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_add_schedule.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_create_profile.xml" value="0.4036458333333333" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_join.xml" value="0.264" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_login.xml" value="0.4" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/activity_profile3.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/day_schedule_recyclerview.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/diary_item.xml" value="0.13072916666666667" />
+        <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/layout/mainactivity_include_layout.xml" value="0.2" />
         <entry key="..\:/Users/whtjd/Desktop/mobile programming project/app/src/main/res/menu/toolbar_layout.xml" value="0.25364583333333335" />
       </map>
     </option>

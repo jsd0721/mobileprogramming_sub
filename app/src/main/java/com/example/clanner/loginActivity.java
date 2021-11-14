@@ -106,3 +106,27 @@ public class loginActivity extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
+                    if (id.equals("jsd0721") && password.equals("ZEUS0721")) {
+                        warningText.setVisibility(View.INVISIBLE);
+                        Intent intent1 = intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        startActivity(intent1);
+                        finish();
+                    } else {
+                        warningText.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+
+        createAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_create_account = new Intent(getApplicationContext(), JoinActivity.class);
+                startActivity(intent_create_account);
+            }
+        });
+    }
+}
+=======
+>>>>>>> ad95a50eb86ea44571670d39c7d93c056e9ba5d0

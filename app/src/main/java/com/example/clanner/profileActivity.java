@@ -21,7 +21,7 @@ public class profileActivity extends AppCompatActivity {
     @Override
     protected  void  onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile3);
+        setContentView(R.layout.activity_create_profile);
 
         findViewById(R.id.btnProfile).setOnClickListener(onClickListener);
     }

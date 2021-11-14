@@ -1,6 +1,7 @@
 package com.example.clanner;
 
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -80,24 +81,6 @@ public class JoinActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
