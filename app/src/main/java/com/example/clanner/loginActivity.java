@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class loginActivity extends AppCompatActivity {
 
-    private  static  final String TAG = "loginActivity";
+    private static final String TAG = "loginActivity";
     private FirebaseAuth mAuth;
 
 
@@ -32,6 +32,7 @@ public class loginActivity extends AppCompatActivity {
         findViewById(R.id.loginButton_loginActivity).setOnClickListener(onClickListener); //로그인버튼
         findViewById(R.id.createAccount_loginActivity).setOnClickListener(onClickListener); //가입하기 textview
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -39,11 +40,11 @@ public class loginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener(){
+    View.OnClickListener onClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.loginButton_loginActivity:
                     login();
                     break;
@@ -54,11 +55,12 @@ public class loginActivity extends AppCompatActivity {
 
         }
     };
-    private void  login(){
-        String email = ((EditText)findViewById(R.id.EmailInput_loginActivity)).getText().toString();
-        String password = ((EditText)findViewById(R.id.passwordInput_loginActivity)).getText().toString();
 
-        if (email.length() > 0 && password.length() > 0){
+    private void login() {
+        String email = ((EditText) findViewById(R.id.EmailInput_loginActivity)).getText().toString();
+        String password = ((EditText) findViewById(R.id.passwordInput_loginActivity)).getText().toString();
+
+        if (email.length() > 0 && password.length() > 0) {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -74,21 +76,23 @@ public class loginActivity extends AppCompatActivity {
                             }
                         }
                     });
-        }else {
+        } else {
             startToast("이메일 또는 비밀번호를 입력해 주세요.");
         }
     }
-    private void  startToast(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+
+    private void startToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void startMainActivity(){
-        Intent intent = new Intent(this,MainActivity.class);
+    private void startMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    private void startjoinActivity(){
-        Intent intent = new Intent(this,JoinActivity.class);
+    private void startjoinActivity() {
+        Intent intent = new Intent(this, JoinActivity.class);
         startActivity(intent);
     }
 }
+
