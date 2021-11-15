@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,8 +51,10 @@ public class JoinActivity extends AppCompatActivity {
         }
     };
     private void  join(){
-        String email = ((EditText)findViewById(R.id.editJoinEmail)).getText().toString();
-        String password = ((EditText)findViewById(R.id.editJoinPassword)).getText().toString();
+        String email = ((EditText)findViewById(R.id.editJoinEmail)).getText().toString()
+                + "@" + ((Spinner)findViewById(R.id.emailSpinner_joinActivity)).getSelectedItem().toString();
+
+        String password = ((EditText)findViewById(R.id.editJoinPassword)).getText().toString() ;
 
         if (email.length() > 0 && password.length() > 0){
             mAuth.createUserWithEmailAndPassword(email, password)
