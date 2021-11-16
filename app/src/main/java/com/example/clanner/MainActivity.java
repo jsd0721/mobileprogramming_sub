@@ -1,5 +1,6 @@
 package com.example.clanner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,11 +10,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -49,13 +52,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        selectedDay = String.valueOf(calendar.getCurrentDate());
+
         calendar.setSelectedDate(CalendarDay.today());
+
+
+        calendar.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                selectedDay = String.valueOf(date).substring(12,22);
+                Log.d("선택된 시간",selectedDay);
+            }
+        });
+
 
         scheduleAddBtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent_scheduleAdd = new Intent(getApplicationContext(),add_schedule_Activity.class);
+            intent_scheduleAdd.putExtra("날짜",selectedDay);
             startActivity(intent_scheduleAdd);
 
             }
@@ -83,4 +97,5 @@ public class MainActivity extends AppCompatActivity {
                 });
         builder.show();
     }
+
 }

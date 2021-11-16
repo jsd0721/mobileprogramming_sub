@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="15dp">
 
 
     <CheckBox
         android:textSize="20dp"
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
+        android:id="@+id/checkBox_dayScheduleRecyclerview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:text="할 일 내용" />
 
-    <Button
-        android:id="@+id/button"
+    <ImageView
+        android:id="@+id/bellOnoffImage_dayScheduleRecyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="삭제"
-        android:layout_marginRight="10dp"
-        android:visibility="invisible"
-        android:layout_gravity="center"/>
+        android:layout_weight="1"
+        app:srcCompat="@drawable/addbutton_mainactivity" />
+
+
 </LinearLayout>
