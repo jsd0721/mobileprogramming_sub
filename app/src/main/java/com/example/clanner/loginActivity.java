@@ -31,6 +31,7 @@ public class loginActivity extends AppCompatActivity {
 
         findViewById(R.id.loginButton_loginActivity).setOnClickListener(onClickListener); //로그인버튼
         findViewById(R.id.createAccount_loginActivity).setOnClickListener(onClickListener); //가입하기 textview
+        findViewById(R.id.passwordFind_loginActivity).setOnClickListener(onClickListener);
     }
 
     @Override
@@ -50,6 +51,9 @@ public class loginActivity extends AppCompatActivity {
                     break;
                 case R.id.createAccount_loginActivity:
                     startjoinActivity();
+                    break;
+                case R.id.passwordFind_loginActivity:
+                    startPasswordResetActivity();
                     break;
             }
 
@@ -92,6 +96,11 @@ public class loginActivity extends AppCompatActivity {
 
     private void startjoinActivity() {
         Intent intent = new Intent(this, JoinActivity.class);
+        startActivity(intent);
+    }
+
+    private void startPasswordResetActivity() {
+        Intent intent = new Intent(this, PasswordResetActivity.class);
         startActivity(intent);
     }
 }

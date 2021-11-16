@@ -47,6 +47,7 @@
         <activity android:name=".profileActivity" />
         <activity android:name=".diaryActivity" />
         <activity android:name=".diarywriteActivity" />
+        <activity android:name=".PasswordResetActivity" />
     </application>
 
 </manifest>
