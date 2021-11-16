@@ -10,7 +10,8 @@
         android:id="@+id/calendarView_mainActivity"
         app:mcv_selectionColor="@color/darkPink"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:mcv_showOtherDates="defaults"/>
 
     <Button
         android:id="@+id/schedule_add_button_mainActivity"
@@ -19,9 +20,11 @@
         android:layout_gravity="right"
         android:layout_marginRight="10dp"
         android:background="@drawable/addbutton_mainactivity"
-        android:text="+" />
+        android:text="+"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:background="@drawable/custom_edittext_box"
         tools:listitem="@layout/day_schedule_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -71,11 +71,11 @@ public class loginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                startToast("로그인에 성공하였습니다.");
                                 startMainActivity();
+
                             } else {
                                 if (task.getException() != null) {
-                                    startToast(task.getException().toString());
+                                    startToast("인터넷 환경을 확인해 주세요");
                                 }
                             }
                         }
@@ -92,6 +92,7 @@ public class loginActivity extends AppCompatActivity {
     private void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void startjoinActivity() {

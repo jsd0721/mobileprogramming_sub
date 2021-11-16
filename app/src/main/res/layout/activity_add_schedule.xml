@@ -80,7 +80,7 @@
             android:id="@+id/selectTimeText_addScheduleActivity"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="__시 __분"
+            android:text="00 : 00"
             android:textSize="20dp"
             android:layout_gravity="center"
             />

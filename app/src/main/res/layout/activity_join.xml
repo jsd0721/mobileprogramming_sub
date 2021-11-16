@@ -61,7 +61,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:padding="20dp"
-            android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:background="@drawable/custom_edittext_box"
             android:layout_marginRight="20dp"
             android:entries="@array/email"/>
 

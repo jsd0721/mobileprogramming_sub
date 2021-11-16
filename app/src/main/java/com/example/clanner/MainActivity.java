@@ -15,8 +15,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -48,10 +51,6 @@ public class MainActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.menuicon);
-
-
-
-
 
         calendar.setSelectedDate(CalendarDay.today());
 
