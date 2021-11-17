@@ -1,6 +1,8 @@
 package com.example.clanner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +36,10 @@ public class add_schedule_Activity extends AppCompatActivity {
     private Switch alarmSwitch;
     private TextView selectTime;
     private EditText scheduleWriteArea;
+
     private Intent intent;
     private FirebaseUser FBuser;
+
 
     //파이어베이스의 DB에 접근하기 위한 작업
     private FirebaseDatabase FBdb  = FirebaseDatabase.getInstance();
@@ -57,6 +63,8 @@ public class add_schedule_Activity extends AppCompatActivity {
         selectTime.setOnClickListener(listener);
         addButton.setOnClickListener(listener);
 
+
+
     }
 
     View.OnClickListener listener = new View.OnClickListener() {
@@ -78,9 +86,21 @@ public class add_schedule_Activity extends AppCompatActivity {
                     time = selectTime.getText().toString();
 
                     scheduleClass schedule = new scheduleClass(FBuser.getEmail(),content,AlarmState,time);
-                    dbRef.child("user").child(FBuser.getUid()).child(today).push().setValue(schedule);
-                    Toast.makeText(add_schedule_Activity.this, "일정이 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                    finish();
+                    dbRef.child("user").child(FBuser.getUid()).child(today).push().setValue(schedule)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(add_schedule_Activity.this, "일정이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(add_schedule_Activity.this,"저장하지 못했습니다",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     break;
 
                 case R.id.selectTimeText_addScheduleActivity :
@@ -97,7 +117,7 @@ public class add_schedule_Activity extends AppCompatActivity {
     TimePickerDialog.OnTimeSetListener TPlistenr = new TimePickerDialog.OnTimeSetListener(){
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                selectTime.setText( hourOfDay + ":" + minute);
+                selectTime.setText((hourOfDay + ":" + minute));
         }
     };
 

@@ -8,10 +8,6 @@ public class scheduleClass {
     int alarmState;
     String time;
 
-
-
-
-
     public scheduleClass(String user, String content, int alarmState, String time){
         this.user = user;
         this.content = content;
