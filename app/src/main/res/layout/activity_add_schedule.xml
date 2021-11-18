@@ -18,7 +18,7 @@
         android:textSize="30dp"/>
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/scheduleWriteArea_addScheduleActivity"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/custom_edittext_box"
@@ -48,7 +48,7 @@
             android:textSize="25dp"/>
 
         <Switch
-            android:id="@+id/switch2"
+            android:id="@+id/alarmSwitch_addScheduleActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -57,7 +57,7 @@
             android:thumb="@drawable/customswitch_thumb"
             android:thumbTextPadding="50dp"
             android:track="@drawable/customswitch_selector"
-            tools:ignore="TouchTargetSizeCheck,UseSwitchCompatOrMaterialXml" />
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 
     <LinearLayout
@@ -77,16 +77,17 @@
             android:textColor="@color/black"
             android:backgroundTint="@color/white"/>
         <TextView
+            android:id="@+id/selectTimeText_addScheduleActivity"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="__시 __분"
+            android:text="00 : 00"
             android:textSize="20dp"
             android:layout_gravity="center"
             />
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/addButton_addScheduleActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="추가하기"

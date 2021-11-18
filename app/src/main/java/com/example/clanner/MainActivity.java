@@ -1,40 +1,62 @@
 package com.example.clanner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity {
 
     //xml상 컴포넌트랑 연결할 객체 선언
-    Button scheduleAddBtn;
-    MaterialCalendarView calendar;
-    Toolbar tb;
+    private FloatingActionButton scheduleAddBtn;
+    private MaterialCalendarView calendar;
+    private RecyclerView scheduleRV;
+    private Toolbar tb;
+    private ArrayList list;
+
+    //리사이클러뷰 연결하기 위한 객체 선언
+    private RecyclerView.LayoutManager LNmanager;
+    private scheduleRCViewAdapter RCViewAdapter;
 
     //날짜 저장할 문자열 변수 선언
     String selectedDay;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //realtimeDB 데이터 받아올 리스트 어레이리스트 선언
+        list = new ArrayList<scheduleClass>();
+
         //객체와 xml상 컴포넌트 연결
-        scheduleAddBtn = (Button)findViewById(R.id.schedule_add_button_mainActivity);
+        scheduleAddBtn = (FloatingActionButton)findViewById(R.id.scheduleWriteButton_mainActivity);
         calendar = (MaterialCalendarView)findViewById(R.id.calendarView_mainActivity);
         tb = (Toolbar)findViewById(R.id.toolbar_mainactivity);
+        scheduleRV = (RecyclerView)findViewById(R.id.scheduleRCView_mainActivity);
 
         //액션바 설정
         setSupportActionBar(tb);
@@ -46,24 +68,32 @@ public class MainActivity extends AppCompatActivity {
         ab.setDisplayShowHomeEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.menuicon);
 
-
-
-
-        selectedDay = String.valueOf(calendar.getCurrentDate());
+        //달력 설정. UI상의 달력에서 선택 날짜를 오늘로 변경하고, selectedday 변수에 일정 추가 액티비티에 넘겨줄 선택 날짜 저장
         calendar.setSelectedDate(CalendarDay.today());
+        calendar.setOnDateChangedListener(onDateSelectedListener);
 
-        scheduleAddBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent_scheduleAdd = new Intent(getApplicationContext(),add_schedule_Activity.class);
-            startActivity(intent_scheduleAdd);
+            list.add(new scheduleClass("me","웹 프로그래밍 과제 하기",0,"15:30"));
+            list.add(new scheduleClass("me","모바일프로그래밍 프로젝트 회의",1,"17:30"));
+            list.add(new scheduleClass("me","가벼운 학습지 풀기",0,"20:30"));
+            list.add(new scheduleClass("me","웹프 회의",1,"15:30"));
+            list.add(new scheduleClass("me","점심식사하기",0,"12:30"));
+            list.add(new scheduleClass("me","일본문화의 시험범위 정리",0,"15:30"));
 
-            }
-        });
+
+
+
+        scheduleAddBtn.setOnClickListener(clickListener);
+
+        //리사이클러뷰에 레이아웃 매니저와 어댑터 부착
+        LNmanager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
+        RCViewAdapter = new scheduleRCViewAdapter(list,this);
+        scheduleRV.setLayoutManager(LNmanager);
+        scheduleRV.setAdapter(RCViewAdapter);
 
 
     }
 
+    //뒤로가기 버튼을 눌렀을 때 종료
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -83,4 +113,27 @@ public class MainActivity extends AppCompatActivity {
                 });
         builder.show();
     }
+
+    View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent_scheduleAdd = new Intent(getApplicationContext(),add_schedule_Activity.class);
+            intent_scheduleAdd.putExtra("날짜",selectedDay);
+            startActivity(intent_scheduleAdd);
+
+        }
+    };
+
+    OnDateSelectedListener onDateSelectedListener = new OnDateSelectedListener() {
+        @Override
+        public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+            selectedDay = String.valueOf(widget.getSelectedDate().getYear()) + "-"
+                    + String.valueOf(widget.getSelectedDate().getMonth()+1) + "-"
+                    + String.valueOf(widget.getSelectedDate().getDay());
+            Log.d("선택된 시간",selectedDay);
+        }
+    };
+
+
+
 }
