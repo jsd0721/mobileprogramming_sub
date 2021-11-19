@@ -53,13 +53,16 @@ public class add_schedule_Activity extends AppCompatActivity {
 
         intent = getIntent();
 
+        //xml컴포넌트 java객체 연결
         addButton = (Button) findViewById(R.id.addButton_addScheduleActivity);
         alarmSwitch = (Switch) findViewById(R.id.alarmSwitch_addScheduleActivity);
         selectTime = (TextView) findViewById(R.id.selectTimeText_addScheduleActivity);
         scheduleWriteArea = (EditText) findViewById(R.id.scheduleWriteArea_addScheduleActivity);
 
+        //유저 구분하기 위한 현재 로그인 유저 확인
         FBuser = FirebaseAuth.getInstance().getCurrentUser();
 
+        //버튼들에 clickListener 부착
         selectTime.setOnClickListener(listener);
         addButton.setOnClickListener(listener);
 

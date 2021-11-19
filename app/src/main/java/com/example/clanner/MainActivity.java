@@ -17,6 +17,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -41,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
     //날짜 저장할 문자열 변수 선언
     String selectedDay;
+
+    //파이어베이스 데이터베이스 관련
+    FirebaseDatabase FBdb = FirebaseDatabase.getInstance();
+    DatabaseReference DBReference = FBdb.getReference();
+    FirebaseUser nowUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
 
@@ -71,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
         //달력 설정. UI상의 달력에서 선택 날짜를 오늘로 변경하고, selectedday 변수에 일정 추가 액티비티에 넘겨줄 선택 날짜 저장
         calendar.setSelectedDate(CalendarDay.today());
         calendar.setOnDateChangedListener(onDateSelectedListener);
+
+        getData();
 
             list.add(new scheduleClass("me","웹 프로그래밍 과제 하기",0,"15:30"));
             list.add(new scheduleClass("me","모바일프로그래밍 프로젝트 회의",1,"17:30"));
@@ -134,6 +148,19 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private void getData(){
+        DBReference.child("user").child(nowUser.getUid().toString()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 }
