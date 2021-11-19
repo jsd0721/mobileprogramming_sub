@@ -12,8 +12,14 @@
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/drawable/customswitch_thumb.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.24375" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_add_schedule.xml" value="0.33" />
+<<<<<<< HEAD
+        <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_camera.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_create_profile.xml" value="0.27239583333333334" />
+=======
+>>>>>>> 47af8f6545d12e19b1c9ef682bcfa3cb7ea807fc
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_diary.xml" value="0.25" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_diarywrite.xml" value="0.25" />
+        <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_gallery.xml" value="0.2515625" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_join.xml" value="0.25" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_join2.xml" value="0.33" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_login.xml" value="0.33" />
@@ -23,6 +29,14 @@
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/activity_profile3.xml" value="0.33" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/day_schedule_recyclerview.xml" value="0.2046875" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/diary_item.xml" value="0.25" />
+<<<<<<< HEAD
+        <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/fragment_camera2_basic.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/layout/mainactivity_include_layout.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/menu/toolbar_layout.xml" value="0.2046875" />
+        <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/drawable/custom_edittext_box.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_join.xml" value="0.2046875" />
+=======
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/menu/toolbar_layout.xml" value="0.2046875" />
         <entry key="..\:/Users/admin/Documents/GitHub/mobileprogramming_sub/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/drawable/custom_edittext_box.xml" value="0.22083333333333333" />
@@ -30,6 +44,7 @@
         <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_diary.xml" value="0.36770833333333336" />
         <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_diarywrite.xml" value="0.36770833333333336" />
         <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_join.xml" value="0.25" />
+>>>>>>> 47af8f6545d12e19b1c9ef682bcfa3cb7ea807fc
         <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_login.xml" value="0.2046875" />
         <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_main.xml" value="0.2046875" />
         <entry key="..\:/Users/whtjd/Desktop/Clanner/app/src/main/res/layout/activity_profile3.xml" value="0.2046875" />

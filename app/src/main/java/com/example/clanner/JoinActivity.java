@@ -62,7 +62,7 @@ public class JoinActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 startToast("회원가입에 성공하였습니다.");
-                                startloginActivity();
+                                profileActivity();
                                 // 성공했을때 로직
                             } else {
                                 if (task.getException() != null){
@@ -79,8 +79,8 @@ public class JoinActivity extends AppCompatActivity {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 
-    private void startloginActivity(){
-        Intent intent = new Intent(this,loginActivity.class);
+    private void profileActivity(){
+        Intent intent = new Intent(this,profileActivity.class);
         startActivity(intent);
     }
 }
