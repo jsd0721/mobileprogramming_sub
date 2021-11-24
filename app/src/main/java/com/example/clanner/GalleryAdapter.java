@@ -1,20 +1,21 @@
 package com.example.clanner;
-/*
+
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class GalleryAdapter extends RecyclerView.Adapter<GalleryActivity.GalleryViewHolder> {
+public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
     private String[] mDataset;
 
     public static class GalleryViewHolder extends RecyclerView.ViewHolder{
-        public TextView textView;
-        public GalleryViewHolder(TextView v){
+        public CardView cardView;
+        public GalleryViewHolder(CardView v){
             super(v);
-            textView = v;
+            cardView = v;
         }
     }
     public GalleryAdapter(String[] myDataset){
@@ -23,25 +24,21 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryActivity.Gallery
 
     @NonNull
     @Override
-    public GalleryActivity.GalleryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.my_text_view,parent,false);
+    public GalleryAdapter.GalleryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gallery,parent,false);
         GalleryViewHolder vh = new GalleryViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GalleryActivity.GalleryViewHolder holder, int position) {
-
-    }
-
-    @Override
     public void onBindViewHolder(GalleryViewHolder holder, int position) {
-        holder.textView.setText(mDataset[position]);
+        //cardview 안에 있는 textview를 가지고 옴
+        TextView textView = holder.cardView.findViewById(R.id.textView);
+        textView.setText(mDataset[position]);
     }
 
     @Override
     public int getItemCount() {
-        mDataset.length;
+        return mDataset.length;
     }
 }
-*/

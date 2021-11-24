@@ -26,7 +26,7 @@
             android:name=".JoinActivity"
             android:exported="false" />
         <activity
-            android:name=".loginActivity"
+            android:name=".profileActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,11 +49,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity android:name=".profileActivity" />
+        <activity android:name=".CameraActivity" />
         <activity android:name=".diaryActivity" />
         <activity android:name=".diarywriteActivity" />
         <activity android:name=".PasswordResetActivity" />
-        <activity android:name=".CameraActivity" />
+        <activity android:name=".loginActivity" />
+        <activity android:name=".GalleryActivity" />
     </application>
 
 </manifest>

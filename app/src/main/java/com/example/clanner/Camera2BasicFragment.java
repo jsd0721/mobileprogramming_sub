@@ -41,6 +41,7 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -60,6 +61,18 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -247,15 +260,23 @@ public class Camera2BasicFragment extends Fragment
      * This a callback object for the {@link ImageReader}. "onImageAvailable" will be called when a
      * still image is ready to be saved.
      */
+
+    /*
     private final ImageReader.OnImageAvailableListener mOnImageAvailableListener
             = new ImageReader.OnImageAvailableListener() {
 
+        // save 하거나 load 할때 처리하는 부분
         @Override
         public void onImageAvailable(ImageReader reader) {
-            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+            mBackgroundHandler.post(new ImageUpLoader(reader.acquireNextImage()));
         }
 
     };
+     */
+    private ImageReader.OnImageAvailableListener mOnImageAvailableListener;
+    public void setOnImageAvailableListener(ImageReader.OnImageAvailableListener mOnImageAvailableListener){
+        this.mOnImageAvailableListener = mOnImageAvailableListener;
+    }
 
     /**
      * {@link CaptureRequest.Builder} for the camera preview
@@ -497,7 +518,7 @@ public class Camera2BasicFragment extends Fragment
      * @param height The height of available size for camera preview
      */
     @SuppressWarnings("SuspiciousNameCombination")
-    private void setUpCameraOutputs(int width, int height, int facingid) {
+    private void setUpCameraOutputs(int width, int height) {
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
@@ -621,7 +642,7 @@ public class Camera2BasicFragment extends Fragment
             requestCameraPermission();
             return;
         }
-        setUpCameraOutputs(width, height, facingid);
+        setUpCameraOutputs(width, height);
         configureTransform(width, height);
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
@@ -640,7 +661,7 @@ public class Camera2BasicFragment extends Fragment
     /**
      * Closes the current {@link CameraDevice}.
      */
-    private void closeCamera() {
+    public void closeCamera() {
         try {
             mCameraOpenCloseLock.acquire();
             if (null != mCaptureSession) {
@@ -782,7 +803,11 @@ public class Camera2BasicFragment extends Fragment
      * Initiate a still image capture.
      */
     private void takePicture() {
+        if (mAutoFocusSupported){
         lockFocus();
+        } else{
+            captureStillPicture();
+        }
     }
 
     /**
@@ -851,7 +876,7 @@ public class Camera2BasicFragment extends Fragment
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    showToast("Saved: " + mFile);
+                    //showToast("Saved: " + mFile);
                     Log.d(TAG, mFile.toString());
                     unlockFocus();
                 }
@@ -925,6 +950,7 @@ public class Camera2BasicFragment extends Fragment
                     CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
         }
     }
+
 
     /**
      * Saves a JPEG {@link Image} into the specified {@link File}.
