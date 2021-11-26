@@ -1,6 +1,9 @@
 package com.example.clanner;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class scheduleClass {
 
     String user;
@@ -8,11 +11,17 @@ public class scheduleClass {
     int alarmState;
     String time;
 
+    //내부 아이템들 초기화 시키기 위한 생성자
     public scheduleClass(String user, String content, int alarmState, String time){
         this.user = user;
         this.content = content;
         this.alarmState = alarmState;
         this.time = time;
+    }
+
+    //객체만 만들기 위한 생성자
+    public scheduleClass(){
+
     }
 
     //getter 메서드 선언
@@ -27,6 +36,16 @@ public class scheduleClass {
     public void setAlarmState(int alarmState){ this.alarmState = alarmState; }
     public void setTime(String time){this.time = time;}
     public void setUser(String user) { this.user = user; }
+
+    public Map<Object, Object> toMap() {
+        HashMap<Object, Object> result = new HashMap<>();
+        result.put("user", user);
+        result.put("content", content);
+        result.put("alarmState", alarmState);
+        result.put("time", time);
+
+        return result;
+    }
 
 
 }

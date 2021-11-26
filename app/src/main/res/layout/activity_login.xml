@@ -48,7 +48,6 @@
         android:selectAllOnFocus="true" />
 
 
-<!--    아이디나 패스워드가 틀렸을때, 혹은 둘 중 하나 입력 안했을때 경고창
     <TextView
         android:id="@+id/warningText_loginActivity"
         android:layout_width="match_parent"
@@ -59,7 +58,7 @@
         android:layout_marginTop="10dp"
         android:visibility="invisible"
         />
--->
+
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
