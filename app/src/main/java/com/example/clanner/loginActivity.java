@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,7 +21,7 @@ public class loginActivity extends AppCompatActivity {
 
     private static final String TAG = "loginActivity";
     private FirebaseAuth mAuth;
-
+    private TextView warningTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class loginActivity extends AppCompatActivity {
         findViewById(R.id.loginButton_loginActivity).setOnClickListener(onClickListener); //로그인버튼
         findViewById(R.id.createAccount_loginActivity).setOnClickListener(onClickListener); //가입하기 textview
         findViewById(R.id.passwordFind_loginActivity).setOnClickListener(onClickListener);
+        warningTextView = findViewById(R.id.warningText_loginActivity);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class loginActivity extends AppCompatActivity {
 
                             } else {
                                 if (task.getException() != null) {
-                                    startToast("인터넷 환경을 확인해 주세요");
+                                    warningTextView.setVisibility(View.VISIBLE);
                                 }
                             }
                         }
