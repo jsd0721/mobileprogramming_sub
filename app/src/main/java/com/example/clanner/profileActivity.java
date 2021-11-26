@@ -1,7 +1,9 @@
 package com.example.clanner;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -89,10 +93,36 @@ public class profileActivity extends AppCompatActivity {
                 myStartActivity(CameraActivity.class);
                 break;
             case R.id.gallery:
-                myStartActivity(GalleryActivity.class);
+                if (ContextCompat.checkSelfPermission(profileActivity.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(profileActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(profileActivity.this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    }else {
+                        startToast("권한을 허용해 주세요.");
+                    }
+                }else{
+                    myStartActivity(GalleryActivity.class);
+                }
                 break;
         }
     };
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    myStartActivity(GalleryActivity.class);
+                } else {
+                    startToast("권한을 허용해 주세요.");
+                }
+            }
+        }
+    }
+
 
     private void  profile(){
         final String name = ((EditText)findViewById(R.id.editUserName)).getText().toString();
