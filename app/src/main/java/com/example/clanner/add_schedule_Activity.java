@@ -88,7 +88,10 @@ public class add_schedule_Activity extends AppCompatActivity {
                     content = scheduleWriteArea.getText().toString();
                     time = selectTime.getText().toString();
 
+                    //scheduleClass에 데이터 넣음
                     scheduleClass schedule = new scheduleClass(FBuser.getEmail(),content,AlarmState,time);
+
+                    //schedule을 firebase에 입력하는 과정
                     dbRef.child("user").child(FBuser.getUid()).child(today).push().setValue(schedule)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
