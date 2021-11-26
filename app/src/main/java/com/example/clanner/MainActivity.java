@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     //날짜 저장할 문자열 변수 선언
     private String selectedDay;
 
+    //user가 선택한 날짜에 일정을 저장했는지 알기 위한 변수;
+    private int dateExistCheck;
+
     //파이어베이스 데이터베이스 관련
     FirebaseDatabase FBdb = FirebaseDatabase.getInstance();
     DatabaseReference DBReference = FBdb.getReference();
@@ -151,7 +154,9 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     private void getData(){
-        if(DBReference.child("user").child(nowUser.getUid()).child(selectedDay).getKey() != null) {
+    checkDate();
+
+        if(dateExistCheck == 1) {
             DBReference.child("user").child(nowUser.getUid()).child(selectedDay).addChildEventListener(new ChildEventListener() {
 
                 @Override
@@ -173,17 +178,14 @@ public class MainActivity extends AppCompatActivity {
                 public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 }
-
                 @Override
                 public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
                 }
-
                 @Override
                 public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     list.add(new scheduleClass("데이터가 없습니다", "0", 1, "0"));
@@ -193,6 +195,24 @@ public class MainActivity extends AppCompatActivity {
         }else{
             list.add(new scheduleClass("데이터가 없습니다","없습니다",1,"data not found"));
         }
+    }
+    //해당 user에 달력에서 선택한 날짜가 있는지 확인하는 메서드
+    private void checkDate(){
+        DBReference.child("user").child(nowUser.getUid()).child(selectedDay).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild(selectedDay)) {
+                    dateExistCheck = 1;
+                } else {
+                    dateExistCheck = 0;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }
