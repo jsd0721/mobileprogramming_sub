@@ -34,12 +34,8 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
-<<<<<<< HEAD
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     //noinspection GradleCompatible
-=======
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
->>>>>>> 86ce387352558984b53f9e1a27167386c51e639f
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.google.firebase:firebase-database:20.0.2'
     implementation 'com.google.firebase:firebase-firestore:24.0.0'

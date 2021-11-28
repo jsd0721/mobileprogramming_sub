@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     private void getData(){
-    checkDate();
+    //checkDate();
 
         if(dateExistCheck == 1) {
             DBReference.child("user").child(nowUser.getUid()).child(selectedDay).addChildEventListener(new ChildEventListener() {
@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
             list.add(new scheduleClass("데이터가 없습니다","없습니다",1,"data not found"));
         }
     }
+    /*
     //해당 user에 달력에서 선택한 날짜가 있는지 확인하는 메서드
     private void checkDate(){
         DBReference.child("user").child(nowUser.getUid()).child(selectedDay).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -214,5 +215,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+*/
 }
