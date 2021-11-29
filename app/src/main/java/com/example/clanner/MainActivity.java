@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     //xml상 컴포넌트랑 연결할 객체 선언
     private FloatingActionButton scheduleAddBtn;
     private MaterialCalendarView calendar;
-    private RecyclerView recyclerView;
+    private RecyclerView scheduleRCView;
     private Toolbar tb;
     private ArrayList list;
     private ListView menuList;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         scheduleAddBtn = (FloatingActionButton)findViewById(R.id.scheduleWriteButton_mainActivity);
         calendar = (MaterialCalendarView)findViewById(R.id.calendarView_mainActivity);
         tb = (Toolbar)findViewById(R.id.toolbar_mainactivity);
-        recyclerView = (RecyclerView)findViewById(R.id.scheduleRCView_mainActivity);
+        scheduleRCView = (RecyclerView)findViewById(R.id.scheduleRCView_mainActivity);
         menuList = (ListView)findViewById(R.id.menuList_MainActivity);
 
 
@@ -101,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
         calendar.setSelectedDate(CalendarDay.today());
         calendar.setOnDateChangedListener(onDateSelectedListener);
 
+        selectedDay = calendar.getSelectedDate().getYear() + "-" + calendar.getSelectedDate().getMonth() + "-" + calendar.getSelectedDate().getDay();
+        Log.d("현재 선택된 날짜 체크",selectedDay);
         getData();
 
 
@@ -109,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
         //리사이클러뷰에 레이아웃 매니저와 어댑터 부착
         LNmanager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         RCViewAdapter = new scheduleRCViewAdapter(list,this);
-        recyclerView.setLayoutManager(LNmanager);
-        recyclerView.setAdapter(RCViewAdapter);
+        scheduleRCView.setLayoutManager(LNmanager);
+        scheduleRCView.setAdapter(RCViewAdapter);
 
 
     }
@@ -147,15 +149,17 @@ public class MainActivity extends AppCompatActivity {
     OnDateSelectedListener onDateSelectedListener = new OnDateSelectedListener() {
         @Override
         public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+            list.clear();
             selectedDay = String.valueOf(widget.getSelectedDate().getYear()) + "-"
                     + String.valueOf(widget.getSelectedDate().getMonth()+1) + "-"
                     + String.valueOf(widget.getSelectedDate().getDay());
-            Log.d("선택된 시간",selectedDay);
+            getData();
         }
     };
     private void getData(){
-    //checkDate();
+        checkDate();
 
+        Log.d("dateExistCheck",String.valueOf(dateExistCheck));
         if(dateExistCheck == 1) {
             DBReference.child("user").child(nowUser.getUid()).child(selectedDay).addChildEventListener(new ChildEventListener() {
 
@@ -172,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.d("alarmstate", content);
                     list.add(schedule_inGetData);
+                    RCViewAdapter.notifyDataSetChanged();
+                    dateExistCheck = 0;
                 }
 
                 @Override
@@ -196,13 +202,16 @@ public class MainActivity extends AppCompatActivity {
             list.add(new scheduleClass("데이터가 없습니다","없습니다",1,"data not found"));
         }
     }
-    /*
     //해당 user에 달력에서 선택한 날짜가 있는지 확인하는 메서드
     private void checkDate(){
-        DBReference.child("user").child(nowUser.getUid()).child(selectedDay).addListenerForSingleValueEvent(new ValueEventListener() {
+
+        DBReference.child("user").child(nowUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("selectedDay",selectedDay);
+                Log.d("참거짓 " ,String.valueOf(snapshot.hasChild(selectedDay)));
                 if (snapshot.hasChild(selectedDay)) {
+
                     dateExistCheck = 1;
                 } else {
                     dateExistCheck = 0;
@@ -215,5 +224,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-*/
 }
