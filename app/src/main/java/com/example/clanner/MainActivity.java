@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
     //해당 user에 달력에서 선택한 날짜가 있는지 확인하는 메서드
     int checkDate(){
-        DBReference.child("user").child(nowUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        DBReference.child("user").child(nowUser.getUid()).child("schedule").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(selectedDay)) {
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(dateBool == 1) {
             list.clear();
-            DBReference.child("user").child(nowUser.getUid()).child(selectedDay).addChildEventListener(new ChildEventListener() {
+            DBReference.child("user").child(nowUser.getUid()).child("schedule").child(selectedDay).addChildEventListener(new ChildEventListener() {
 
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
