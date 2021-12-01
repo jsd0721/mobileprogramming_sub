@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
         getData(selectedDay);
         Log.d("액티비티 실행 시 선태된 날짜",selectedDay);
 
-
     }
 
 
@@ -230,6 +229,5 @@ public class MainActivity extends AppCompatActivity {
             RCViewAdapter.notifyDataSetChanged();
         }
     }
-
 
 }
