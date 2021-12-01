@@ -5,13 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
-
 
     <application
         android:allowBackup="true"
@@ -22,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FriendActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateProfileActivity"
             android:exported="false" />
         <activity
@@ -30,17 +33,16 @@
         <activity
             android:name=".profileActivity"
             android:exported="true">
-
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
-                    android:scheme="http"
-                    android:host="google.com"/>
+                    android:host="google.com"
+                    android:scheme="http" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".add_schedule_Activity"
@@ -52,9 +54,10 @@
         <activity android:name=".diaryActivity" />
         <activity android:name=".diarywriteActivity" />
         <activity android:name=".PasswordResetActivity" />
-        <activity android:name=".loginActivity" >
+        <activity android:name=".loginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
