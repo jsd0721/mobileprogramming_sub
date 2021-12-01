@@ -36,21 +36,9 @@
 
     </LinearLayout>
 
-
-
-    <ListView
-         android:id="@+id/list"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         tools:listitem="@layout/diary_item"
-        android:layout_margin="7dp">
-
-    </ListView>
-
-    <!--<androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="7dp"
-        tools:listitem="@layout/diary_item"/>-->
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>
