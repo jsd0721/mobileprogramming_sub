@@ -30,10 +30,7 @@
         <activity
             android:name=".DiaryActicity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -54,7 +51,12 @@
         <activity android:name=".CameraActivity" />
         <activity android:name=".profileActivity" />
         <activity android:name=".PasswordResetActivity" />
-        <activity android:name=".loginActivity" />
+        <activity android:name=".loginActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".GalleryActivity" />
         <activity android:name=".diarywriteActivity" />
     </application>

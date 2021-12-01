@@ -11,12 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,24 +27,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    //xml상 컴포넌트랑 연결할 객체 선언
-    private FloatingActionButton scheduleAddBtn;
-    private MaterialCalendarView calendar;
-    private RecyclerView recyclerView;
-    private Toolbar tb;
     private ArrayList list;
-    private ListView menuList;
 
     //리사이클러뷰 연결하기 위한 객체 선언
     private RecyclerView.LayoutManager LNmanager;
@@ -56,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private String selectedDay;
 
     //user가 선택한 날짜에 일정을 저장했는지 알기 위한 변수;
-    private int dateExistCheck;
+    private int dateExistCheck = 0;
 
     //파이어베이스 데이터베이스 관련
     FirebaseDatabase FBdb = FirebaseDatabase.getInstance();
@@ -76,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
         //메뉴 화면에 표시해 줄 리스트 텍스트 선언
         String[] listMenuTitle = {"내가 쓴 다이어리","친구 관리","설정"};
 
-        //객체와 xml상 컴포넌트 연결
-        scheduleAddBtn = (FloatingActionButton)findViewById(R.id.scheduleWriteButton_mainActivity);
-        calendar = (MaterialCalendarView)findViewById(R.id.calendarView_mainActivity);
-        tb = (Toolbar)findViewById(R.id.toolbar_mainactivity);
-        recyclerView = (RecyclerView)findViewById(R.id.scheduleRCView_mainActivity);
-        menuList = (ListView)findViewById(R.id.menuList_MainActivity);
+
+        FloatingActionButton scheduleAddBtn = (FloatingActionButton) findViewById(R.id.scheduleWriteButton_mainActivity);
+        MaterialCalendarView calendar = (MaterialCalendarView) findViewById(R.id.calendarView_mainActivity);
+        Toolbar tb = (Toolbar) findViewById(R.id.toolbar_mainactivity);
+        RecyclerView scheduleRCView = (RecyclerView) findViewById(R.id.scheduleRCView_mainActivity);
+        ListView menuList = (ListView) findViewById(R.id.menuList_MainActivity);
 
 
         //액션바 설정
@@ -101,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
         calendar.setSelectedDate(CalendarDay.today());
         calendar.setOnDateChangedListener(onDateSelectedListener);
 
-        getData();
+        selectedDay = calendar.getSelectedDate().getYear()
+                + "-" + calendar.getSelectedDate().getMonth()
+                + "-" + calendar.getSelectedDate().getDay();
 
 
         scheduleAddBtn.setOnClickListener(clickListener);
@@ -109,11 +100,14 @@ public class MainActivity extends AppCompatActivity {
         //리사이클러뷰에 레이아웃 매니저와 어댑터 부착
         LNmanager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         RCViewAdapter = new scheduleRCViewAdapter(list,this);
-        recyclerView.setLayoutManager(LNmanager);
-        recyclerView.setAdapter(RCViewAdapter);
+        scheduleRCView.setLayoutManager(LNmanager);
+        scheduleRCView.setAdapter(RCViewAdapter);
+
+        getData();
 
 
     }
+
 
     //뒤로가기 버튼을 눌렀을 때 종료
     @Override
@@ -135,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
                 });
         builder.show();
     }
+
+    //플로팅액션버튼 클릭 리스너
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -144,34 +140,53 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    //달력에서 날짜 선택했을 때 동작
     OnDateSelectedListener onDateSelectedListener = new OnDateSelectedListener() {
         @Override
         public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+            list.clear();
             selectedDay = String.valueOf(widget.getSelectedDate().getYear()) + "-"
                     + String.valueOf(widget.getSelectedDate().getMonth()+1) + "-"
                     + String.valueOf(widget.getSelectedDate().getDay());
-            Log.d("선택된 시간",selectedDay);
+            getData();
         }
     };
-    private void getData(){
-    //checkDate();
 
-        if(dateExistCheck == 1) {
-            DBReference.child("user").child(nowUser.getUid()).child(selectedDay).addChildEventListener(new ChildEventListener() {
+    //해당 user에 달력에서 선택한 날짜가 있는지 확인하는 메서드
+    int checkDate(){
+        DBReference.child("user").child(nowUser.getUid()).child("schedule").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild(selectedDay)) {
+                    dateExistCheck = 1;
+
+                } else {
+                    dateExistCheck = 0;
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        Log.d("날짜 존재 여부 확인",String.valueOf(dateExistCheck));
+        return dateExistCheck;
+    }
+
+    void getData(){
+        int dateBool = checkDate();
+
+        if(dateBool == 1) {
+            list.clear();
+            DBReference.child("user").child(nowUser.getUid()).child("schedule").child(selectedDay).addChildEventListener(new ChildEventListener() {
 
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-
                     scheduleClass schedule_inGetData = snapshot.getValue(scheduleClass.class);
-
-                    String user = schedule_inGetData.user;
-                    String content = schedule_inGetData.content;
-                    int alarmState = schedule_inGetData.alarmState;
-                    String time = schedule_inGetData.time;
-
-                    Log.d("alarmstate", content);
                     list.add(schedule_inGetData);
+                    RCViewAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -188,32 +203,14 @@ public class MainActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    list.add(new scheduleClass("데이터가 없습니다", "0", 1, "0"));
                 }
 
             });
         }else{
+            list.clear();
             list.add(new scheduleClass("데이터가 없습니다","없습니다",1,"data not found"));
         }
     }
-    /*
-    //해당 user에 달력에서 선택한 날짜가 있는지 확인하는 메서드
-    private void checkDate(){
-        DBReference.child("user").child(nowUser.getUid()).child(selectedDay).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild(selectedDay)) {
-                    dateExistCheck = 1;
-                } else {
-                    dateExistCheck = 0;
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-    }
-*/
 }
