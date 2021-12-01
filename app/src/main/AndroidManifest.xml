@@ -28,7 +28,7 @@
             android:name=".JoinActivity"
             android:exported="false" />
         <activity
-            android:name=".DiaryActicity"
+            android:name=".DiaryActivity"
             android:exported="true">
 
             <intent-filter>

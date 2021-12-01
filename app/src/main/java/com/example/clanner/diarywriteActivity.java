@@ -255,7 +255,7 @@ public class diarywriteActivity extends AppCompatActivity {
     }
 
     private void startDiaryActicity() {
-        Intent intent = new Intent(this, DiaryActicity.class);
+        Intent intent = new Intent(this, DiaryActivity.class);
         startActivity(intent);
     }
 }

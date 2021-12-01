@@ -24,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DiaryActicity extends AppCompatActivity {
+public class DiaryActivity extends AppCompatActivity {
     private static final String TAG = "DiaryActivity";
 
     @Override
@@ -34,7 +34,9 @@ public class DiaryActicity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user == null){
+        if (user == null) {
+            myStartActivity(loginActivity.class);
+        }else {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             DocumentReference docRef = db.collection("users").document(user.getUid());
             docRef.get().addOnCompleteListener((task) -> {
@@ -69,9 +71,9 @@ public class DiaryActicity extends AppCompatActivity {
                                 }
                                 RecyclerView recyclerView = findViewById(R.id.recyclerView);
                                 recyclerView.setHasFixedSize(true);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(DiaryActicity.this));
+                                recyclerView.setLayoutManager(new LinearLayoutManager(DiaryActivity.this));
 
-                                RecyclerView.Adapter mAdapter = new DiaryAdapter(DiaryActicity.this,postList);
+                                RecyclerView.Adapter mAdapter = new DiaryAdapter(DiaryActivity.this,postList);
                                 recyclerView.setAdapter(mAdapter);
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());

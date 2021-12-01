@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
 
         getData();
 
-
     }
 
 
@@ -211,6 +210,5 @@ public class MainActivity extends AppCompatActivity {
             list.add(new scheduleClass("데이터가 없습니다","없습니다",1,"data not found"));
         }
     }
-
 
 }
