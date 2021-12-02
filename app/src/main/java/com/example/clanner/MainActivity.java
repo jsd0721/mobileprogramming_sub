@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.apphosting.datastore.testing.DatastoreTestTrace;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -47,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase FBdb = FirebaseDatabase.getInstance();
     DatabaseReference DBReference = FBdb.getReference();
     FirebaseUser nowUser = FirebaseAuth.getInstance().getCurrentUser();
+    DatabaseReference scheduleReference = DBReference.child("user").child(nowUser.getUid()).child("schedule");
 
-    int dateExistCheck;
+    String CurrentDate;
 
 
 
@@ -86,7 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,listMenuTitle);
+        menuList.setAdapter(adapter);
 
         //액션바 설정
         setSupportActionBar(tb);
@@ -98,14 +101,13 @@ public class MainActivity extends AppCompatActivity {
         ab.setDisplayShowHomeEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.menuicon);
 
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,listMenuTitle);
-        menuList.setAdapter(adapter);
+
 
         //달력 설정. UI상의 달력에서 선택 날짜를 오늘로 변경하고, selectedday 변수에 일정 추가 액티비티에 넘겨줄 선택 날짜 저장
         calendar.setSelectedDate(CalendarDay.today());
         calendar.setOnDateChangedListener(onDateSelectedListener);
 
-        String selectedDay = calendar.getSelectedDate().getYear()
+        CurrentDate = calendar.getSelectedDate().getYear()
                 + "-" + (calendar.getSelectedDate().getMonth()+1)
                 + "-" + calendar.getSelectedDate().getDay();
 
@@ -113,8 +115,9 @@ public class MainActivity extends AppCompatActivity {
         scheduleAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("seledtedDay",CurrentDate);
                 Intent intent_scheduleAdd = new Intent(getApplicationContext(),add_schedule_Activity.class);
-                intent_scheduleAdd.putExtra("날짜",selectedDay);
+                intent_scheduleAdd.putExtra("날짜",CurrentDate);
                 startActivity(intent_scheduleAdd);
 
             }
@@ -126,8 +129,8 @@ public class MainActivity extends AppCompatActivity {
         scheduleRCView.setLayoutManager(LNmanager);
         scheduleRCView.setAdapter(RCViewAdapter);
 
-        getData(selectedDay);
-        Log.d("액티비티 실행 시 선태된 날짜",selectedDay);
+        getData(CurrentDate);
+        Log.d("액티비티 실행 시 선태된 날짜",CurrentDate);
 
     }
 
@@ -160,74 +163,102 @@ public class MainActivity extends AppCompatActivity {
         public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
             list.clear();
             //선택되어 있는 날짜
-            String CurrentDay= String.valueOf(widget.getSelectedDate().getYear()) + "-"
+            String Date= String.valueOf(widget.getSelectedDate().getYear()) + "-"
                     + String.valueOf(widget.getSelectedDate().getMonth()+1) + "-"
                     + String.valueOf(widget.getSelectedDate().getDay());
-            getData(CurrentDay);
+            Log.e("참거짓",String.valueOf(!CurrentDate.equals(Date)));
+            if(!CurrentDate.equals(Date)){
+                CurrentDate = Date;
+                getData(Date);
+            }else{
+                Toast.makeText(MainActivity.this, "같은 날짜를 선택하셧습니다.", Toast.LENGTH_SHORT).show();
+            }
+            Log.d("선택 날짜" , CurrentDate);
         }
     };
 
-    //해당 user에 달력에서 선택한 날짜가 있는지 확인하는 메서드
-    int checkDate(String currentDay){
-
-        DBReference.child("user").child(nowUser.getUid()).child("schedule").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if (snapshot.hasChild(currentDay)) {
-                    dateExistCheck = 1;
-
-                } else {
-                    dateExistCheck = 0;
-                }
-                Log.d("날짜 존재 여부 확인",String.valueOf(dateExistCheck));
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-        Log.d("날짜 존재 여부 확인 prereturn",String.valueOf(dateExistCheck));
-        return dateExistCheck;
-
-
-    }
-
     void getData(String Date){
-        int dateBool = checkDate(Date);
-        list.clear();
-        if(dateBool == 1) {
-            DBReference.child("user").child(nowUser.getUid()).child("schedule").child(Date).addChildEventListener(new ChildEventListener() {
-
+        if(scheduleReference.child(Date) != null){
+            scheduleReference.child(Date).addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                    scheduleClass schedule_inGetData = snapshot.getValue(scheduleClass.class);
-                    list.add(schedule_inGetData);
-                    RCViewAdapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 }
+
                 @Override
                 public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
                 }
+
                 @Override
                 public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                }
 
+                }
             });
         }else{
-            list.add(new scheduleClass("데이터가 없습니다","없습니다",1,"data not found"));
-            RCViewAdapter.notifyDataSetChanged();
+
         }
     }
 
+//    void getData(String Date){
+//
+//        list.clear();
+//
+//        ValueEventListener eventListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Log.d("Date",Date);
+//
+//                if (snapshot.hasChild(Date)) {
+//                    scheduleReference.child(Date).addChildEventListener(new ChildEventListener() {
+//
+//                        @Override
+//                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//                            scheduleClass schedule_inGetData = snapshot.getValue(scheduleClass.class);
+//                            list.add(schedule_inGetData);
+//                            RCViewAdapter.notifyDataSetChanged();
+//                        }
+//
+//                        @Override
+//                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//                        }
+//                        @Override
+//                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//                        }
+//                        @Override
+//                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//                        }
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//                            Log.e("에러 발생",String.valueOf(error));
+//                        }
+//                    });
+//
+//                } else {
+//                    list.add(new scheduleClass("데이터가 없습니다","없습니다",1,"data not found"));
+//                    RCViewAdapter.notifyDataSetChanged();
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+//            }
+//        };
+//        scheduleReference.addListenerForSingleValueEvent(eventListener);
+//    }
+//
 }
