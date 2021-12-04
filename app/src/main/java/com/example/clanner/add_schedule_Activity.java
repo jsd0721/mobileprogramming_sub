@@ -89,23 +89,27 @@ public class add_schedule_Activity extends AppCompatActivity {
                     time = selectTime.getText().toString();
 
                     //scheduleClass에 데이터 넣음
-                    scheduleClass schedule = new scheduleClass(FBuser.getEmail(),content,AlarmState,time);
+                    scheduleClass schedule = new scheduleClass(FBuser.getEmail(),content,AlarmState,time,today);
 
                     //schedule을 firebase에 입력하는 과정
-                    dbRef.child("user").child(FBuser.getUid()).child("schedule").child(today).push().setValue(schedule)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(add_schedule_Activity.this, "일정이 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(add_schedule_Activity.this,"저장하지 못했습니다",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                    if(!content.equals("")){
+                        dbRef.child("user").child(FBuser.getUid()).child("schedule").push().setValue(schedule)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(add_schedule_Activity.this, "일정이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(add_schedule_Activity.this, "저장하지 못했습니다", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }else{
+                        Toast.makeText(getApplicationContext(),"일정을 입력하여 주십시오",Toast.LENGTH_SHORT).show();
+                    }
 
                     break;
 
