@@ -13,6 +13,15 @@ public class WriteInfo {
     private ArrayList<String> content;
     private String publisher;
     private Date createdAt;
+    private String id;
+
+    public WriteInfo(String title, ArrayList<String> content, String publisher, Date createdAt, String id){
+        this.title = title;
+        this.content=content;
+        this.publisher=publisher;
+        this.createdAt=createdAt;
+        this.id=id;
+    }
 
     public WriteInfo(String title, ArrayList<String> content, String publisher, Date createdAt){
         this.title = title;
@@ -47,6 +56,13 @@ public class WriteInfo {
     }
     public void setCreatedAt(Date createdAt){
         this.createdAt = createdAt;
+    }
+
+    public String getId(){
+        return this.id;
+    }
+    public void setId(String id){
+        this.id = id;
     }
 
 }

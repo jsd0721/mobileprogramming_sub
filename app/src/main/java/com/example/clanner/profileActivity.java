@@ -93,22 +93,12 @@ public class profileActivity extends AppCompatActivity {
                 myStartActivity(CameraActivity.class);
                 break;
             case R.id.gallery:
-                if (ContextCompat.checkSelfPermission(profileActivity.this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(profileActivity.this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(profileActivity.this,
-                            Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    }else {
-                        startToast("권한을 허용해 주세요.");
-                    }
-                }else{
-                    myStartActivity(GalleryActivity.class);
-                }
+                myStartActivity(GalleryActivity.class);
                 break;
         }
     };
 
+    /* 권한 두번받는거 너무 비효율적이라 일단 주석처리
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -122,6 +112,7 @@ public class profileActivity extends AppCompatActivity {
             }
         }
     }
+     */
 
 
     private void  profile(){

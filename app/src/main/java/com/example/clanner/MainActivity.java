@@ -85,8 +85,10 @@ public class MainActivity extends AppCompatActivity {
                     Intent Settingintent = new Intent(MainActivity.this,SettingActivity.class);
                     startActivity(Settingintent);
                 }else{
+                    Intent Diaryintent = new Intent(MainActivity.this,DiaryActivity.class);
+                    startActivity(Diaryintent);
                     //Intent Diaryintent = new Intent(MainActivity.this,)
-                    Toast.makeText(MainActivity.this, "Diary보기 액티비티로 넘어가는 로직", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, "Diary보기 액티비티로 넘어가는 로직", Toast.LENGTH_SHORT).show();
                 }
             }
         });
