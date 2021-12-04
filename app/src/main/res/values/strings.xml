@@ -8,4 +8,10 @@
     <string name="text_email">이메일</string>
     <string name="request_permission">This sample needs camera permission.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <!--
+    <string name="facebook_app_id">1174333419999005</string>
+    <string name="fb_login_protocol_scheme">fb1174333419999005</string>
+    -->
+
+
 </resources>

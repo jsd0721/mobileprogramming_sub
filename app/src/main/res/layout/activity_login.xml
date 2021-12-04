@@ -110,5 +110,35 @@
             android:textColor="@color/darkPink"/>
     </LinearLayout>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="40dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="──────   SNS 계정으로 로그인   ──────"
+        android:gravity="center"/>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_google"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="20dp"/>
+<!--
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btn_facebook"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
+        tools:ignore="TouchTargetSizeCheck" />
+        -->
+
+</LinearLayout>
 
 </LinearLayout>
