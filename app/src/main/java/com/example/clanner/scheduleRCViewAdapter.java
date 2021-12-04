@@ -1,11 +1,15 @@
 package com.example.clanner;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
@@ -32,7 +36,30 @@ public class scheduleRCViewAdapter extends RecyclerView.Adapter<scheduleRCViewAd
 
             CbTodaySchedule = (CheckBox) itemView.findViewById(R.id.checkBox_dayScheduleRecyclerview);
             alarmImage = (ImageView) itemView.findViewById(R.id.bellOnoffImage_dayScheduleRecyclerview);
-
+            CbTodaySchedule.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("CLANNER")
+                            .setMessage("삭제하시겠습니까?")
+                            .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //데이터 삭제하는 로직 들어가야됨.
+                                    Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //아무 일도 안함
+                                    Toast.makeText(context,"취소하셧습니다",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    builder.show();
+                    return true;
+                }
+            });
         }
     }
 
