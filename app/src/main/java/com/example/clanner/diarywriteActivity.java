@@ -83,6 +83,8 @@ public class diarywriteActivity extends AppCompatActivity {
 
                     ImageView imageView = new ImageView(diarywriteActivity.this);
                     imageView.setLayoutParams(layoutParams);
+                    imageView.setAdjustViewBounds(true); //이미지(1)
+                    imageView.setScaleType(ImageView.ScaleType.FIT_XY); //딱맞게(2)
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -144,12 +146,19 @@ public class diarywriteActivity extends AppCompatActivity {
 
         if (title.length() > 0 && content.length() > 0) {
             ArrayList<String> contentList = new ArrayList<>();
-
             user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference();
             FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-            final DocumentReference documentReference = firebaseFirestore.collection("cities").document(); //id값을 얻기 위해 선언
+
+            String id = getIntent().getStringExtra("id");
+            DocumentReference dr;
+            if (id == null){
+                dr = firebaseFirestore.collection("cities").document();
+            }else {
+                dr = firebaseFirestore.collection("cities").document(id);
+            }
+            final DocumentReference documentReference = dr; //id값을 얻기 위해 선언
 
             for (int i=0; i<parent.getChildCount(); i++){
                 View view = parent.getChildAt(i);

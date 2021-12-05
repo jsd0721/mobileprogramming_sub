@@ -2,6 +2,7 @@ package com.example.clanner;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Image;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -33,43 +34,23 @@ import java.util.Locale;
 public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHolder> {
     private ArrayList<WriteInfo> mDataset;
     private Activity activity;
-    private FirebaseFirestore firebaseFirestore;
+    private OnWriteListener onWriteListener;
 
     public static class DiaryViewHolder extends RecyclerView.ViewHolder{
         public CardView cardView;
-        public DiaryViewHolder(Activity activity, CardView v, WriteInfo writeInfo){
+        public DiaryViewHolder(CardView v){
             super(v);
             cardView = v;
-
-            LinearLayout contentsLayout = cardView.findViewById(R.id.contentsLayout);
-            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            ArrayList<String> contentList = writeInfo.getContent();
-            if (contentsLayout.getChildCount() == 0) {
-                for (int i=0; i < contentList.size(); i++){  //content에 있는만큼 반복
-                    String content = contentList.get(i);
-                    if (Patterns.WEB_URL.matcher(content).matches()){
-                        ImageView imageView = new ImageView(activity);
-                        imageView.setLayoutParams(layoutParams);
-
-                        //다이어리에 나오는 이미지를 딱맞는 크기로 출력해주는 부분
-                        imageView.setAdjustViewBounds(true);
-                        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
-                        contentsLayout.addView(imageView);
-                    }else {
-                        TextView textView = new TextView(activity);
-                        textView.setLayoutParams(layoutParams);
-                        contentsLayout.addView(textView);
-                    }
-                }
-            }
         }
     }
 
     public DiaryAdapter(Activity activity, ArrayList<WriteInfo> myDataset){
-        mDataset = myDataset;
+        this.mDataset = myDataset;
         this.activity = activity;
-        firebaseFirestore = FirebaseFirestore.getInstance();
+    }
+
+    public void setOnWriteListener(OnWriteListener onWriteListener){
+        this.onWriteListener = onWriteListener;
     }
 
     @Override
@@ -81,7 +62,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
     @Override
     public DiaryAdapter.DiaryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_diary,parent,false);
-        final DiaryViewHolder diaryViewHolder = new DiaryViewHolder(activity, cardView, mDataset.get(viewType)); //positiontype = viewType 으로 알 수  있다.
+        final DiaryViewHolder diaryViewHolder = new DiaryViewHolder(cardView); //positiontype = viewType 으로 알 수  있다.
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,14 +91,37 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
         createAtTextView.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(mDataset.get(position).getCreatedAt()));
 
         LinearLayout contentsLayout = cardView.findViewById(R.id.contentsLayout);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ArrayList<String> contentList = mDataset.get(position).getContent();
 
-        for (int i=0; i < contentList.size(); i++){  //content에 있는만큼 반복
-            String content = contentList.get(i);
-            if (Patterns.WEB_URL.matcher(content).matches()){
-                Glide.with(activity).load(content).override(1000).thumbnail(0.1f).into((ImageView)contentsLayout.getChildAt(i)); //thumbnail(_) => 흐릿하게 이미지 보여줌
-            }else {
-                ((TextView)contentsLayout.getChildAt(i)).setText(content);
+        if (contentsLayout.getTag() == null || !contentsLayout.getTag().equals(contentList)){
+            contentsLayout.setTag(contentList);
+            contentsLayout.removeAllViews();
+            final int MORE_INDEX = 2;
+            for (int i=0; i<contentList.size(); i++){
+                 if (i == MORE_INDEX){
+                     TextView textView = new TextView(activity);
+                     textView.setLayoutParams(layoutParams);
+                     textView.setText("더보기..");
+                     contentsLayout.addView(textView);
+                     break;
+                 } //위의 FOR문은 다이어리 작성시 2개이상의 이미지가 뜨면 '더보기'로 보이기 위해 코딩한 부분
+                String content =contentList.get(i);
+                if (Patterns.WEB_URL.matcher(content).matches() && content.contains("https://firebasestorage.googleapis.com/v0/b/clanner-2087a.appspot.com/o/posts")){
+                    ImageView imageView = new ImageView(activity);
+                    imageView.setLayoutParams(layoutParams);
+                    imageView.setAdjustViewBounds(true);
+                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    contentsLayout.addView(imageView);
+                    Glide.with(activity).load(content).override(1000).thumbnail(0.1f).into(imageView); //thumbnail(_) => 흐릿하게 이미지 보여줌
+                }
+                else {
+                    TextView textView = new TextView(activity);
+                    textView.setLayoutParams(layoutParams);
+                    textView.setText(content);
+                    textView.setTextColor(Color.rgb(0,0,0));
+                    contentsLayout.addView(textView);
+                }
             }
         }
     }
@@ -137,9 +141,11 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.modify:
-
+                        onWriteListener.onModify(position);
                         return true;
                     case R.id.delete:
+                        onWriteListener.onDelete(position);
+                        /*
                         firebaseFirestore.collection("cities").document(mDataset.get(position).getId())
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -154,6 +160,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
                                         Toast.makeText(activity,"삭제를 실패했습니다.",Toast.LENGTH_SHORT).show();
                                     }
                                 });
+                         */
 
                         return true;
                     default:
