@@ -160,8 +160,8 @@ public class DiaryActivity extends AppCompatActivity {
 
         @Override
         public void onModify(int position) {
-            String id = postList.get(position).getId();
-            myStartActivity(diarywriteActivity.class, id);
+            // String id = postList.get(position).getId();
+            myStartActivity(diarywriteActivity.class, postList.get(position));
         }
     };
 
@@ -214,9 +214,9 @@ public class DiaryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void myStartActivity(Class c, String id){
+    private void myStartActivity(Class c, WriteInfo writeInfo){
         Intent intent = new Intent(this,c);
-        intent.putExtra("id",id);
+        intent.putExtra("writeInfo",writeInfo);
         startActivity(intent);
     }
 
