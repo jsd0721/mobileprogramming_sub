@@ -2,12 +2,13 @@ package com.example.clanner;
 
 import android.widget.EditText;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 /* 게시자의 uid를 추가로 저장해서 찾아봄 => publisher */
 
-public class WriteInfo {
+public class WriteInfo implements Serializable {
 
     private String title;
     private ArrayList<String> content;
