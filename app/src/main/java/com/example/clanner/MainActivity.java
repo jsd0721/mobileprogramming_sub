@@ -35,6 +35,9 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -173,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("참거짓",String.valueOf(!CurrentDate.equals(Date_inListener)));
             if(!CurrentDate.equals(Date_inListener)){
                 CurrentDate = Date_inListener;
-                getData(CurrentDate);
+                inquireData(CurrentDate);
             }else{
                 Toast.makeText(MainActivity.this, "같은 날짜를 선택하셧습니다.", Toast.LENGTH_SHORT).show();
             }
@@ -181,16 +184,15 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    <count> void getData(String Date){
+    void getData(String Date){
         scheduleReference.child(Date).addChildEventListener(new ChildEventListener() {
-            int count = 0;
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 scheduleClass scheduleData = snapshot.getValue(scheduleClass.class);
-                Log.d("데이터 들어옴?",scheduleData.content);
+                Map<Object,Object> mapdata = scheduleData.toMap();
+                Log.d("데이터",mapdata.toString());
                 list.add(scheduleData);
                 RCViewAdapter.notifyDataSetChanged();
-                count++;
             }
 
             @Override
@@ -213,58 +215,32 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
+    void inquireData(String Date){
 
-//    void getData(String Date){
-//
-//        list.clear();
-//
-//        ValueEventListener eventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Log.d("Date",Date);
-//
-//                if (snapshot.hasChild(Date)) {
-//                    scheduleReference.child(Date).addChildEventListener(new ChildEventListener() {
-//
-//                        @Override
-//                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//                            scheduleClass schedule_inGetData = snapshot.getValue(scheduleClass.class);
-//                            list.add(schedule_inGetData);
-//                            RCViewAdapter.notifyDataSetChanged();
-//                        }
-//
-//                        @Override
-//                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//                        }
-//                        @Override
-//                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//                        }
-//                        @Override
-//                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//                        }
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//                            Log.e("에러 발생",String.valueOf(error));
-//                        }
-//                    });
-//
-//                } else {
-//                    list.add(new scheduleClass("데이터가 없습니다","없습니다",1,"data not found"));
-//                    RCViewAdapter.notifyDataSetChanged();
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-//            }
-//        };
-//        scheduleReference.addListenerForSingleValueEvent(eventListener);
-//    }
-//
+        scheduleReference.child(Date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    String value = snapshot.getValue().toString();
+                    Log.d("value",value);
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                        Log.d("데이터",dataSnapshot.getValue().toString());
+                        scheduleClass data = dataSnapshot.getValue(scheduleClass.class);
+                        list.add(data);
+                        RCViewAdapter.notifyDataSetChanged();
+                    }
+                }catch(Exception e){
+                    list.clear();
+                    RCViewAdapter.notifyDataSetChanged();
+                    Log.e("에러",e.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("에러!",error.toString());
+            }
+        });
+    }
 }

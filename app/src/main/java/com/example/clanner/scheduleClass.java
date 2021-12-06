@@ -13,7 +13,7 @@ public class scheduleClass {
     String Date;
 
     //내부 아이템들 초기화 시키기 위한 생성자
-    public scheduleClass(String user, String content, int alarmState, String time,String Date){
+    public scheduleClass(String user, String content, int alarmState, String time, String Date){
         this.user = user;
         this.content = content;
         this.alarmState = alarmState;
@@ -31,7 +31,7 @@ public class scheduleClass {
     public int getAlarmState(){ return alarmState;}
     public String getTime(){return time;}
     public String getUser() { return user; }
-    public String getDate() { return Date;}
+    public String getDate(){ return Date;}
 
     //setter 메서드 선언
 
@@ -39,18 +39,18 @@ public class scheduleClass {
     public void setAlarmState(int alarmState){ this.alarmState = alarmState; }
     public void setTime(String time){this.time = time;}
     public void setUser(String user) { this.user = user; }
-    public void setDate(String Date){ this.Date = Date;}
+    public void setDate(String Date) { this.Date = Date; }
 
-//    public Map<Object, Object> toMap() {
-//        HashMap<Object, Object> result = new HashMap<>();
-//        result.put("user", user);
-//        result.put("content", content);
-//        result.put("alarmState", alarmState);
-//        result.put("time", time);
-//        result.put("date",Date);
-//
-//        return result;
-//    }
+    public Map<Object, Object> toMap() {
+        HashMap<Object, Object> result = new HashMap<>();
+        result.put("user", user);
+        result.put("content", content);
+        result.put("alarmState", alarmState);
+        result.put("time", time);
+        result.put("date",Date);
+
+        return result;
+    }
 
 
 }

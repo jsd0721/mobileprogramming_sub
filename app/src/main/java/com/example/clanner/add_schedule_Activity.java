@@ -28,6 +28,8 @@ import com.google.firebase.firestore.auth.User;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class add_schedule_Activity extends AppCompatActivity {
 
@@ -79,9 +81,8 @@ public class add_schedule_Activity extends AppCompatActivity {
                     int AlarmState;//알람 여부 변수
                     String content;
                     String time;
-
                     String today = intent.getStringExtra("날짜");
-
+                    Map<Object, Object> inputdata = new HashMap<>();
                     //알람 스위치가 켜져 있으면 1, 꺼져 있으면 0
                     if(alarmSwitch.isChecked()){ AlarmState = 1; } else{ AlarmState = 0; }
 
@@ -90,10 +91,11 @@ public class add_schedule_Activity extends AppCompatActivity {
 
                     //scheduleClass에 데이터 넣음
                     scheduleClass schedule = new scheduleClass(FBuser.getEmail(),content,AlarmState,time,today);
+                    inputdata = schedule.toMap();
 
                     //schedule을 firebase에 입력하는 과정
                     if(!content.equals("")){
-                        dbRef.child("user").child(FBuser.getUid()).child("schedule").push().setValue(schedule)
+                        dbRef.child("user").child(FBuser.getUid()).child("schedule").child(today).push().setValue(inputdata)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {

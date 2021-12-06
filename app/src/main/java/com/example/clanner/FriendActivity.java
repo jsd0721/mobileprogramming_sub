@@ -17,5 +17,7 @@ public class FriendActivity extends AppCompatActivity {
         String[] array = {"친구 추가","친구 삭제", "일정 공유 설정"};
         ArrayAdapter adapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,array);
         listview.setAdapter(adapter);
+
+
     }
 }
