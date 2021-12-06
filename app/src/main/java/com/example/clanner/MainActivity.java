@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("액티비티 실행 시 선태된 날짜",CurrentDate);
 
     }
+    //액티비티가 꺼졋다 재시작할 때, 조회 로직을 다시 실행하여 일정 뷰 갱신
     @Override
     public void onRestart() {
         super.onRestart();
