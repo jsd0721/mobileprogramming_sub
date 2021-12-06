@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_scheduleAdd = new Intent(getApplicationContext(),add_schedule_Activity.class);
                 intent_scheduleAdd.putExtra("날짜",CurrentDate);
                 startActivity(intent_scheduleAdd);
-
             }
         });
 
@@ -139,6 +138,12 @@ public class MainActivity extends AppCompatActivity {
         getData(CurrentDate);
         Log.d("액티비티 실행 시 선태된 날짜",CurrentDate);
 
+    }
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        list.clear();
+        inquireData(CurrentDate);
     }
 
 
@@ -216,21 +221,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //데이터를 클릭하여 조회하는 부분
     void inquireData(String Date){
 
         scheduleReference.child(Date).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
+                    //예외처리를 통하여 데이터가 없을 시 리스트를 초기화 시켜주기 위한 부분
                     String value = snapshot.getValue().toString();
                     Log.d("value",value);
+
+                    //datasnapshot을 순회하며 리사이클러뷰에 데이터를 뿌리는 로직
                     for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                        Log.d("데이터",dataSnapshot.getValue().toString());
+                        Log.d("데이터",dataSnapshot.getValue().toString());
                         scheduleClass data = dataSnapshot.getValue(scheduleClass.class);
                         list.add(data);
                         RCViewAdapter.notifyDataSetChanged();
                     }
                 }catch(Exception e){
+
+                    //리스트를 초기화시켜줌
                     list.clear();
                     RCViewAdapter.notifyDataSetChanged();
                     Log.e("에러",e.toString());
