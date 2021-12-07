@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     String CurrentDate;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView scheduleRCView = (RecyclerView) findViewById(R.id.scheduleRCView_mainActivity);
         ListView menuList = (ListView) findViewById(R.id.menuList_MainActivity);
         drawer = findViewById(R.id.drawarLayout_mainActivity);
+        findViewById(R.id.logoutButton_MainActivity).setOnClickListener(onClickListener);
 
         //드로워 메뉴 리스트 설정
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,listMenuTitle);
@@ -278,4 +278,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.logoutButton_MainActivity:
+                    FirebaseAuth.getInstance().signOut();
+                    startloginActivity();
+                    break;
+            }
+        }
+    };
+
+    private void startloginActivity(){
+        Intent intent = new Intent(this, loginActivity.class);
+        startActivity(intent);
+    }
 }
