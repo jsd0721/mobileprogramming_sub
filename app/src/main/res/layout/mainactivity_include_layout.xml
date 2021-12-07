@@ -19,13 +19,41 @@
             app:mcv_showOtherDates="defaults"
             app:mcv_tileHeight="45dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.example.clanner.recyclerViewEmptySupport
             android:id="@+id/scheduleRCView_mainActivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             tools:listitem="@layout/day_schedule_recyclerview"
             android:background="@drawable/custom_edittext_box"/>
+
+        <LinearLayout
+            android:id="@+id/RecyclerViewIsEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            tools:listitem="@layout/day_schedule_recyclerview"
+            android:background="@drawable/custom_edittext_box"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <ImageView
+                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:src="@drawable/recyclerview_empty"
+                android:layout_gravity="center"
+                android:layout_marginTop="70dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="등록된 일정이 없어요"
+                android:textStyle="bold"
+                android:fontFamily="@font/font_l"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"/>
+
+                />
+        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

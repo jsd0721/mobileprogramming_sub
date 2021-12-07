@@ -5,7 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".addFriendsActivity">
+    tools:context=".addFriendsActivity"
+    android:background="#ffffff">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" android:backgroundTint="@color/primaryPink"/>
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,16 +35,17 @@
                 android:textSize="30dp"
                 android:layout_weight="1"
                 android:textStyle="bold"
+                android:textColor="@color/darkPink"
                 android:layout_gravity="center"/>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/friendAddButton_addFriendsActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="확인"
                 android:textSize="20dp"
-                android:textColor="@color/darkPink"
-                android:background="#ffffff" />
+                android:textColor="@color/white"
+                android:background="@drawable/button_corner"/>
         </LinearLayout>
 
         <EditText
