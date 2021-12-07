@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".listOfFriendsActivity"
+            android:exported="false" />
+        <activity
             android:name=".addFriendsActivity"
             android:exported="false" />
         <activity

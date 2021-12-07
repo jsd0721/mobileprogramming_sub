@@ -6,14 +6,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +23,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.apphosting.datastore.testing.DatastoreTestTrace;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -35,8 +36,6 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -54,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser nowUser = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference scheduleReference = DBReference.child("user").child(nowUser.getUid()).child("schedule");
     DatabaseReference FriendReference = DBReference.child("user").child(nowUser.getUid()).child("Friends");
+    DrawerLayout drawer;
 
     String CurrentDate;
 
@@ -76,27 +76,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar_mainactivity);
         RecyclerView scheduleRCView = (RecyclerView) findViewById(R.id.scheduleRCView_mainActivity);
         ListView menuList = (ListView) findViewById(R.id.menuList_MainActivity);
+        drawer = findViewById(R.id.drawarLayout_mainActivity);
 
-        menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                if(i == 1){
-                    Intent Friendintent = new Intent(MainActivity.this,FriendActivity.class);
-                    startActivity(Friendintent);
-                }else if(i == 2){
-                    Intent Settingintent = new Intent(MainActivity.this,SettingActivity.class);
-                    startActivity(Settingintent);
-                }else{
-                    Intent Diaryintent = new Intent(MainActivity.this,DiaryActivity.class);
-                    startActivity(Diaryintent);
-                    //Intent Diaryintent = new Intent(MainActivity.this,)
-                    //Toast.makeText(MainActivity.this, "Diary보기 액티비티로 넘어가는 로직", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        //드로워 메뉴 리스트 설정
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,listMenuTitle);
         menuList.setAdapter(adapter);
+        menuList.setOnItemClickListener(menulistListener);
 
         //액션바 설정
         setSupportActionBar(tb);
@@ -105,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
         //액션바에서 내비게이션 버튼 만들기
         ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowHomeEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.menuicon);
 
 
@@ -139,7 +123,24 @@ public class MainActivity extends AppCompatActivity {
         Log.d("액티비티 실행 시 선태된 날짜",CurrentDate);
 
     }
-    //액티비티가 꺼졋다 재시작할 때, 조회 로직을 다시 실행하여 일정 뷰 갱신
+
+    //메뉴 버튼 클릭 따라 열고 닫히기 구현
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        switch(menuItem.getItemId()){
+            case android.R.id.home:
+                if(drawer.isDrawerOpen(Gravity.LEFT)){
+                    drawer.closeDrawer(Gravity.LEFT);
+                    return true;
+                }else{
+                    drawer.openDrawer(Gravity.LEFT);
+                    return true;
+                }
+        }
+        return onOptionsItemSelected(menuItem);
+    }
+
+    //액티비티가 꺼졋다 재시작할 때, 조회 로직을 다시 실행하여 schedule 뷰 갱신
     @Override
     public void onRestart() {
         super.onRestart();
@@ -190,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //데이터 목록 추가될 때 인식하는 리스너 추가
     void getData(String Date){
         scheduleReference.child(Date).addChildEventListener(new ChildEventListener() {
             @Override
@@ -256,4 +258,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //메뉴리스트 리스너
+    AdapterView.OnItemClickListener menulistListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            if(i == 1){
+                Intent Friendintent = new Intent(MainActivity.this,FriendActivity.class);
+                startActivity(Friendintent);
+            }else if(i == 2){
+                Intent Settingintent = new Intent(MainActivity.this,SettingActivity.class);
+                startActivity(Settingintent);
+            }else{
+                Intent Diaryintent = new Intent(MainActivity.this,DiaryActivity.class);
+                startActivity(Diaryintent);
+                //Intent Diaryintent = new Intent(MainActivity.this,)
+                //Toast.makeText(MainActivity.this, "Diary보기 액티비티로 넘어가는 로직", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 }
