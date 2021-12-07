@@ -50,15 +50,11 @@ public class addFriendsActivity extends AppCompatActivity {
 
             EditText EmailText = findViewById(R.id.insertEmail_addFriendsActivity);
             String email = EmailText.getText().toString();
-            if(email.equals("")){
-
-                Toast.makeText(addFriendsActivity.this,"이메일을 입력하여 주세요",Toast.LENGTH_SHORT).show();
-
+            //user 정보 불러오기
+            FirebaseUser user = auth.getCurrentUser();
+            if(email.equals("")||email.equals(user.getEmail())){
+                Toast.makeText(addFriendsActivity.this,"이메일을 확인하여 주세요",Toast.LENGTH_SHORT).show();
             }else{
-
-                //user 정보 불러오기
-                FirebaseUser user = auth.getCurrentUser();
-
                 //firebase realtime database 연결
                 DBReference = FirebaseDatabase.getInstance().getReference();
 
@@ -72,24 +68,18 @@ public class addFriendsActivity extends AppCompatActivity {
                 userReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot data : snapshot.getChildren()){
+                        for(DataSnapshot data : snapshot.getChildren()) {
                             key = data.getKey();
                             Data = snapshot.child(key).child("user_info").child("user_email").getValue().toString();
-                            Log.d("데이터",Data);
-                            array.add(Data);
-                        }
-                        if(array.contains(email)){
-                            for(String str : array){
-                                if(email.equals(str)){
-                                    userReference.child(key).child("friends").child(user.getUid()).setValue(send_addFriend);
-                                    Toast.makeText(addFriendsActivity.this,"친구 신청이 성공적으로 완료되었습니다",Toast.LENGTH_SHORT).show();
-                                    EmailText.setText("");
-                                }
+                            Log.d("데이터", Data);
+                            if (email.equals(Data)) {
+                                userReference.child(key).child("friends").child(user.getUid()).setValue(send_addFriend);
+                                Toast.makeText(addFriendsActivity.this, "친구 신청이 성공적으로 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                EmailText.setText("");
+                            }else{
+                                Toast.makeText(addFriendsActivity.this,"사용자를 찾을 수 없습니다",Toast.LENGTH_SHORT).show();
                             }
-                        }else{
-                            Toast.makeText(addFriendsActivity.this,"사용자를 찾을 수 없습니다",Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
                     @Override
