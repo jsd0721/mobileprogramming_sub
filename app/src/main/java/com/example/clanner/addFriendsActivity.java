@@ -28,7 +28,8 @@ public class addFriendsActivity extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference DBReference;
     String key;
-    ArrayList<String> Data = new ArrayList<>();
+    String Data;
+    ArrayList<String> array = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +74,22 @@ public class addFriendsActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot data : snapshot.getChildren()){
                             key = data.getKey();
-                            String Data = snapshot.child(key).child("user_info").child("user_email").getValue().toString();
+                            Data = snapshot.child(key).child("user_info").child("user_email").getValue().toString();
                             Log.d("데이터",Data);
-                            if(email.equals(Data)){
-                                userReference.child(key).child("friends").child(user.getUid()).setValue(send_addFriend);
-                                Toast.makeText(addFriendsActivity.this,"친구 신청이 성공적으로 완료되었습니다",Toast.LENGTH_SHORT).show();
-                            }
+                            array.add(Data);
                         }
+                        if(array.contains(email)){
+                            for(String str : array){
+                                if(email.equals(str)){
+                                    userReference.child(key).child("friends").child(user.getUid()).setValue(send_addFriend);
+                                    Toast.makeText(addFriendsActivity.this,"친구 신청이 성공적으로 완료되었습니다",Toast.LENGTH_SHORT).show();
+                                    EmailText.setText("");
+                                }
+                            }
+                        }else{
+                            Toast.makeText(addFriendsActivity.this,"사용자를 찾을 수 없습니다",Toast.LENGTH_SHORT).show();
+                        }
+
                     }
 
                     @Override
