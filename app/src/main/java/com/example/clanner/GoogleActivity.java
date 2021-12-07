@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class GoogleActivity extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class GoogleActivity extends AppCompatActivity {
                     startToast("로그인을 성공하였습니다.");
                     break;
                 case R.id.googleNo_btn:
+                    FirebaseAuth.getInstance().signOut();
                     startloginActivity();
                     break;
             }

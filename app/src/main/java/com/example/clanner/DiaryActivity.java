@@ -69,7 +69,6 @@ public class DiaryActivity extends AppCompatActivity {
                             Log.d(TAG,"DocumentSnapshot data: "+document.getData());
                         }else{
                             Log.d(TAG,"No such document");
-                            myStartActivity(profileActivity.class);
                         }
                     }
                 }else{
@@ -112,6 +111,7 @@ public class DiaryActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         findViewById(R.id.btnDiarywrite).setOnClickListener(onClickListener);
+        findViewById(R.id.back).setOnClickListener(onClickListener);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(DiaryActivity.this));
@@ -171,6 +171,9 @@ public class DiaryActivity extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.btnDiarywrite:
                     myStartActivity(diarywriteActivity.class);
+                    break;
+                case R.id.back:
+                    myStartActivity(MainActivity.class);
                     break;
             }
         }

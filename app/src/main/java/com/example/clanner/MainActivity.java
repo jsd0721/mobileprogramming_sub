@@ -9,19 +9,23 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.apphosting.datastore.testing.DatastoreTestTrace;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -30,19 +34,26 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
-
     private ArrayList list;
+    private TextView nameTextView;
+    private ImageView photoImageView;
+    private Uri imageUri;
+    private FirebaseAuth auth;
 
     //리사이클러뷰 연결하기 위한 객체 선언
     private RecyclerView.LayoutManager LNmanager;
@@ -57,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
     String CurrentDate;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        auth = FirebaseAuth.getInstance();
 
         //realtimeDB 데이터 받아올 리스트 어레이리스트 선언
         list = new ArrayList<scheduleClass>();
@@ -76,6 +87,17 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView scheduleRCView = (RecyclerView) findViewById(R.id.scheduleRCView_mainActivity);
         ListView menuList = (ListView) findViewById(R.id.menuList_MainActivity);
         findViewById(R.id.logoutButton_MainActivity).setOnClickListener(onClickListener);
+        FirebaseUser user = auth.getCurrentUser();
+
+        nameTextView = (TextView)findViewById(R.id.profileNickname_mainActivity);
+        photoImageView = (ImageView)findViewById(R.id.profileImage_mainActivity);
+        nameTextView.setText(user.getDisplayName());
+        photoImageView.setImageURI(user.getPhotoUrl());
+
+
+
+
+
 
         menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -139,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("액티비티 실행 시 선태된 날짜",CurrentDate);
 
     }
+
     //액티비티가 꺼졋다 재시작할 때, 조회 로직을 다시 실행하여 일정 뷰 갱신
     @Override
     public void onRestart() {
@@ -262,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.logoutButton_MainActivity:
-                    FirebaseAuth.getInstance().signOut();
+                    auth.signOut();
                     startloginActivity();
                     break;
             }

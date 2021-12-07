@@ -56,8 +56,8 @@ public class loginActivity extends AppCompatActivity implements GoogleApiClient.
                 .requestEmail()
                 .build();
         googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                 .build();
 
 
@@ -68,7 +68,7 @@ public class loginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onClick(View v) {
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-                startActivityForResult(intent,RED_SIGN_GOOGLE);
+                startActivityForResult(intent, RED_SIGN_GOOGLE);
             }
         });
 
@@ -77,55 +77,7 @@ public class loginActivity extends AppCompatActivity implements GoogleApiClient.
         findViewById(R.id.passwordFind_loginActivity).setOnClickListener(onClickListener);
         warningTextView = findViewById(R.id.warningText_loginActivity);
 
-        /*
-        // Facebook Login button
-        mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.btn_facebook);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-            }
-        });
-         */
     }
-
-    /*
-    private void handleFacebookAccessToken(AccessToken token) {
-        //Log.d(TAG, "handleFacebookAccessToken:" + token);
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            //Log.d(TAG, "signInWithCredential:success");
-                            //FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            //Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(loginActivity.this, "FaceBook 연동 성공",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
-                    }
-                });
-    }
-    */
-
-
-
     //구글 로그인 인증을 요청했을때 결과 값을 되돌려 받는곳
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
