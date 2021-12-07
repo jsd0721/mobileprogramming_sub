@@ -24,8 +24,8 @@ public class FriendActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i == 0){
-//                    Intent intent = new Intent(FriendActivity.this,listOfFriendsActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(FriendActivity.this,listOfFriendsActivity.class);
+                    startActivity(intent);
                 }else if(i == 1){
                     Intent intent = new Intent(FriendActivity.this,addFriendsActivity.class);
                     startActivity(intent);
