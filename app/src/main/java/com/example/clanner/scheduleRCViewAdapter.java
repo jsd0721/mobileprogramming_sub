@@ -12,12 +12,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class scheduleRCViewAdapter extends RecyclerView.Adapter<scheduleRCViewAdapter.scheduleViewholder> {
 
     ArrayList<scheduleClass> list;
     Context context;
+
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser user =auth.getCurrentUser();
+    DatabaseReference scheduleReference = FirebaseDatabase.getInstance().getReference().child("user").child(user.getUid()).child("schedule");
 
     //생성자
     public scheduleRCViewAdapter(ArrayList<scheduleClass> list, Context context) {

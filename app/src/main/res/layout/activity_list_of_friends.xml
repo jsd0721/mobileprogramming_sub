@@ -13,12 +13,12 @@
         android:layout_height="wrap_content" />
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabSelectedTextColor="@color/darkPink"
-        android:background="@color/primaryPink"
         app:tabIndicatorColor="@color/primaryPink"
-        app:tabTextColor="@color/white">
+        app:tabTextColor="@color/black">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -33,34 +33,8 @@
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/recyclerviewPager_listOfFriendsActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <com.example.clanner.recyclerViewEmptySupport
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler"
-        android:orientation="vertical" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:src="@drawable/recyclerview_empty"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"/>
-
-        <TextView
-            android:id="@+id/list_empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="추가되어 있는 친구가 없어요"
-            android:textSize="20dp" />
-    </LinearLayout>
-
 
 </LinearLayout>

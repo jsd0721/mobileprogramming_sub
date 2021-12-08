@@ -58,10 +58,7 @@ public class addFriendsActivity extends AppCompatActivity {
                 //firebase realtime database 연결
                 DBReference = FirebaseDatabase.getInstance().getReference();
 
-                //친구 신청을 하는 과정(세 가지 상태가 있음-stay : 수락 대기, reject - 수락 거절, allow - 수락 되어있음)
-                Map<String,String> send_addFriend = new HashMap<>();
-                send_addFriend.put("status","stay");
-                send_addFriend.put("email",user.getEmail());
+
 
                 //프렌즈 노드에 액세스 하기 위한 코드
                 DatabaseReference userReference = DBReference.child("user");
@@ -73,6 +70,15 @@ public class addFriendsActivity extends AppCompatActivity {
                             Data = snapshot.child(key).child("user_info").child("user_email").getValue().toString();
                             Log.d("데이터", Data);
                             if (email.equals(Data)) {
+
+                                //친구 신청을 하는 과정(세 가지 상태가 있음-stay : 수락 대기, reject - 수락 거절, allow - 수락 되어있음)
+                                Map<String,String> send_addFriend = new HashMap<>();
+                                send_addFriend.put("status","stay");
+                                send_addFriend.put("email",user.getEmail());
+                                send_addFriend.put("user_nickname",snapshot.child(user.getUid()).child("user_info").child("user_nickname").getValue().toString());
+                                send_addFriend.put("user_photo",snapshot.child(user.getUid()).child("user_info").child("user_photo").getValue().toString());
+
+
                                 userReference.child(key).child("friends").child(user.getUid()).setValue(send_addFriend);
                                 Toast.makeText(addFriendsActivity.this, "친구 신청이 성공적으로 완료되었습니다", Toast.LENGTH_SHORT).show();
                                 EmailText.setText("");
