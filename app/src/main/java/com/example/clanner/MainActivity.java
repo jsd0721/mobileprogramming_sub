@@ -15,10 +15,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-<<<<<<< HEAD
-import android.view.LayoutInflater;
-=======
->>>>>>> fc50fc5f106649db4db1437282392be80cbb5cdc
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -150,10 +146,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-<<<<<<< HEAD
-    //액티비티가 꺼졋다 재시작할 때, 조회 로직을 다시 실행하여 일정 뷰 갱신
-=======
->>>>>>> fc50fc5f106649db4db1437282392be80cbb5cdc
     //메뉴 버튼 클릭 따라 열고 닫히기 구현
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
