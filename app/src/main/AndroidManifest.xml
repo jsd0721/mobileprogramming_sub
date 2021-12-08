@@ -26,9 +26,6 @@
             android:name=".addFriendsActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingActivity"
-            android:exported="false" />
-        <activity
             android:name=".FriendActivity"
             android:exported="false" />
         <activity

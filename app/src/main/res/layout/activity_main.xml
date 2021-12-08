@@ -50,13 +50,30 @@
                     android:backgroundTint="@color/primaryPink"
                     android:orientation="vertical">
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_gravity="center_horizontal"
+                        app:cardCornerRadius="70dp"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            tools:srcCompat="@tools:sample/avatars"
+                            android:background="@drawable/img"/>
+                    </androidx.cardview.widget.CardView>
+                    <!--
                     <ImageView
                         android:id="@+id/profileImage_mainActivity"
                         android:layout_width="256px"
                         android:layout_height="256px"
                         android:layout_gravity="center"
                         android:layout_marginTop="50dp"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:background="@drawable/img"/> -->
 
                     <TextView
                         android:id="@+id/profileNickname_mainActivity"
@@ -65,7 +82,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="15dp"
                         android:fontFamily="@font/font_b"
-                        android:text="경상대조성동"
+                        android:text="이지은"
                         android:textColor="@color/black"
                         android:textSize="30dp" />
                 </LinearLayout>
