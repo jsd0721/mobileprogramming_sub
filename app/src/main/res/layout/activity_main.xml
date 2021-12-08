@@ -19,36 +19,36 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawarLayout_mainActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/drawarLayout_mainActivity">
+        android:layout_height="match_parent">
 
         <include
             android:id="@+id/navigationParentView"
+            layout="@layout/mainactivity_include_layout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            layout="@layout/mainactivity_include_layout"/>
+            android:layout_height="wrap_content" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_gravity="left"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_edittext_box"
                     android:backgroundTint="@color/primaryPink"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/profileImage_mainActivity"
@@ -64,10 +64,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="15dp"
+                        android:fontFamily="@font/font_b"
                         android:text="경상대조성동"
                         android:textColor="@color/black"
-                        android:textSize="30dp"
-                        android:fontFamily="@font/font_b"/>
+                        android:textSize="30dp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -75,7 +75,7 @@
             <ListView
                 android:id="@+id/menuList_MainActivity"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <ImageButton
                 android:id="@+id/logoutButton_MainActivity"
@@ -89,11 +89,6 @@
         </LinearLayout>
 
     </androidx.drawerlayout.widget.DrawerLayout>
-
-
-
-
-
 
 
 </LinearLayout>

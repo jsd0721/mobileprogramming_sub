@@ -15,19 +15,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+<<<<<<< HEAD
 import android.view.LayoutInflater;
+=======
+>>>>>>> fc50fc5f106649db4db1437282392be80cbb5cdc
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,16 +37,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -65,11 +59,15 @@ public class MainActivity extends AppCompatActivity {
     //파이어베이스 데이터베이스 관련
     FirebaseDatabase FBdb = FirebaseDatabase.getInstance();
     DatabaseReference DBReference = FBdb.getReference();
+
+    //권한 관련 선언
     FirebaseUser nowUser = FirebaseAuth.getInstance().getCurrentUser();
+
+    //firebase 여러 레퍼런스들 설정
     DatabaseReference scheduleReference = DBReference.child("user").child(nowUser.getUid()).child("schedule");
     DatabaseReference FriendReference = DBReference.child("user").child(nowUser.getUid()).child("Friends");
-    DrawerLayout drawer;
 
+    DrawerLayout drawer;
     String CurrentDate;
 
     @Override
@@ -88,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton scheduleAddBtn = (FloatingActionButton) findViewById(R.id.scheduleWriteButton_mainActivity);
         MaterialCalendarView calendar = (MaterialCalendarView) findViewById(R.id.calendarView_mainActivity);
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar_mainactivity);
-        RecyclerView scheduleRCView = (RecyclerView) findViewById(R.id.scheduleRCView_mainActivity);
+        recyclerViewEmptySupport scheduleRCView = (recyclerViewEmptySupport)findViewById(R.id.scheduleRCView_mainActivity);
         ListView menuList = (ListView) findViewById(R.id.menuList_MainActivity);
         drawer = findViewById(R.id.drawarLayout_mainActivity);
         findViewById(R.id.logoutButton_MainActivity).setOnClickListener(onClickListener);
@@ -144,13 +142,18 @@ public class MainActivity extends AppCompatActivity {
         RCViewAdapter = new scheduleRCViewAdapter(list,this);
         scheduleRCView.setLayoutManager(LNmanager);
         scheduleRCView.setAdapter(RCViewAdapter);
+        scheduleRCView.setEmptyView(findViewById(R.id.RecyclerViewIsEmpty));
+
 
         getData(CurrentDate);
         Log.d("액티비티 실행 시 선태된 날짜",CurrentDate);
 
     }
 
+<<<<<<< HEAD
     //액티비티가 꺼졋다 재시작할 때, 조회 로직을 다시 실행하여 일정 뷰 갱신
+=======
+>>>>>>> fc50fc5f106649db4db1437282392be80cbb5cdc
     //메뉴 버튼 클릭 따라 열고 닫히기 구현
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
@@ -300,8 +303,6 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 Intent Diaryintent = new Intent(MainActivity.this,DiaryActivity.class);
                 startActivity(Diaryintent);
-                //Intent Diaryintent = new Intent(MainActivity.this,)
-                //Toast.makeText(MainActivity.this, "Diary보기 액티비티로 넘어가는 로직", Toast.LENGTH_SHORT).show();
             }
         }
     };

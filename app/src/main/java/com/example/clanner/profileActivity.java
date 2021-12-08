@@ -31,6 +31,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -40,12 +42,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Map;
 
 public class profileActivity extends AppCompatActivity {
     private  static  final String TAG = "profileActivity";
     private ImageView imageView3;
     private FirebaseUser user;
     private String profilePath;
+    private DatabaseReference DBrefernce;
 
     @Override
     protected  void  onCreate(Bundle savedInstanceState){
@@ -54,6 +58,9 @@ public class profileActivity extends AppCompatActivity {
 
         imageView3 = findViewById(R.id.imageView3);
         imageView3.setOnClickListener(onClickListener);
+
+        DBrefernce = FirebaseDatabase.getInstance().getReference();
+
 
         findViewById(R.id.btnProfile).setOnClickListener(onClickListener);
         findViewById(R.id.picture).setOnClickListener(onClickListener);
@@ -151,7 +158,7 @@ public class profileActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Uri downloadUri = task.getResult();
 
-                                Memberinfo memberinfo = new Memberinfo(name,downloadUri.toString());
+                                Memberinfo memberinfo = new Memberinfo(name,downloadUri.toString(),user.getEmail());
                                 uploader(memberinfo);
                             } else {
                                 startToast("회원정보를 보내는데 실패하였습니다");
@@ -190,6 +197,8 @@ public class profileActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        DatabaseReference user_info = DBrefernce.child("user").child(user.getUid()).child("user_info");
+                        user_info.setValue(memberinfo.tomap());
                         startToast("프로필 설정을 성공하였습니다.");
                         startMainActivity();
                     }
