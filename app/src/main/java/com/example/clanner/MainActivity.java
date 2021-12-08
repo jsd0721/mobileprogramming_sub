@@ -15,12 +15,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-<<<<<<< HEAD
 import android.view.LayoutInflater;
-=======
 import android.view.Gravity;
 import android.view.MenuItem;
->>>>>>> f0dadd28d4c0e2a3b3efe89b90b997cc26b029c9
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -153,9 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-<<<<<<< HEAD
     //액티비티가 꺼졋다 재시작할 때, 조회 로직을 다시 실행하여 일정 뷰 갱신
-=======
     //메뉴 버튼 클릭 따라 열고 닫히기 구현
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
@@ -173,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //액티비티가 꺼졋다 재시작할 때, 조회 로직을 다시 실행하여 schedule 뷰 갱신
->>>>>>> f0dadd28d4c0e2a3b3efe89b90b997cc26b029c9
     @Override
     public void onRestart() {
         super.onRestart();
