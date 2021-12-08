@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         list = new ArrayList<scheduleClass>();
 
         //메뉴 화면에 표시해 줄 리스트 텍스트 선언
-        String[] listMenuTitle = {"내가 쓴 다이어리","친구 관리","설정"};
+        String[] listMenuTitle = {"내가 쓴 다이어리","친구 관리"};
 
 
         FloatingActionButton scheduleAddBtn = (FloatingActionButton) findViewById(R.id.scheduleWriteButton_mainActivity);
@@ -87,16 +87,13 @@ public class MainActivity extends AppCompatActivity {
         drawer = findViewById(R.id.drawarLayout_mainActivity);
         findViewById(R.id.logoutButton_MainActivity).setOnClickListener(onClickListener);
         FirebaseUser user = auth.getCurrentUser();
-
+/*
         nameTextView = (TextView)findViewById(R.id.profileNickname_mainActivity);
         photoImageView = (ImageView)findViewById(R.id.profileImage_mainActivity);
         nameTextView.setText(user.getDisplayName());
         photoImageView.setImageURI(user.getPhotoUrl());
 
-
-
-
-
+ */
 
         //드로워 메뉴 리스트 설정
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,listMenuTitle);
@@ -289,9 +286,6 @@ public class MainActivity extends AppCompatActivity {
             if(i == 1){
                 Intent Friendintent = new Intent(MainActivity.this,FriendActivity.class);
                 startActivity(Friendintent);
-            }else if(i == 2){
-                Intent Settingintent = new Intent(MainActivity.this,SettingActivity.class);
-                startActivity(Settingintent);
             }else{
                 Intent Diaryintent = new Intent(MainActivity.this,DiaryActivity.class);
                 startActivity(Diaryintent);

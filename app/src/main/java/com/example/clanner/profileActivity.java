@@ -181,8 +181,8 @@ public class profileActivity extends AppCompatActivity {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 
-    private void startMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void startloginActivity() {
+        Intent intent = new Intent(this,loginActivity.class);
         startActivityForResult(intent,0);
     }
 
@@ -200,7 +200,7 @@ public class profileActivity extends AppCompatActivity {
                         DatabaseReference user_info = DBrefernce.child("user").child(user.getUid()).child("user_info");
                         user_info.setValue(memberinfo.tomap());
                         startToast("프로필 설정을 성공하였습니다.");
-                        startMainActivity();
+                        startloginActivity();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
