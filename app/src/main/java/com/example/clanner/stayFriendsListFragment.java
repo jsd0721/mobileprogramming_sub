@@ -80,13 +80,17 @@ public class stayFriendsListFragment extends Fragment {
         FirebaseUser user = auth.getCurrentUser();
 
         DBReference.child("user").child(user.getUid()).child("friends").addChildEventListener(new ChildEventListener() {
+            String nickname;
+            String email;
+            String photoURL;
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(snapshot.child("status").getValue().toString().equals("stay")){
-                    String nickname = snapshot.child("user_nickname").getValue().toString();
-                    String email = snapshot.child("email").getValue().toString();
-                    String photoURL = snapshot.child("user_photo").getValue().toString();
 
+                nickname = snapshot.child("user_nickname").getValue().toString();
+                email = snapshot.child("email").getValue().toString();
+                photoURL = snapshot.child("user_photo").getValue().toString();
+
+                if(snapshot.child("status").getValue().toString().equals("stay")){
                     list.add(new Memberinfo(nickname,photoURL,email));
                     adapter.notifyDataSetChanged();
                 }
@@ -95,6 +99,14 @@ public class stayFriendsListFragment extends Fragment {
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+                nickname = snapshot.child("user_nickname").getValue().toString();
+                email = snapshot.child("email").getValue().toString();
+                photoURL = snapshot.child("user_photo").getValue().toString();
+
+                if(snapshot.child("status").getValue().toString().equals("stay")) {
+                    list.add(new Memberinfo(nickname, photoURL, email));
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
